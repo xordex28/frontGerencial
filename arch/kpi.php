@@ -15,15 +15,15 @@ curl_setopt_array($curlHandler, [
     CURLOPT_POST => true,
 
     CURLOPT_POSTFIELDS => $data,
-    ]);
+]);
 
-    $response = curl_exec($curlHandler);
+$response = curl_exec($curlHandler);
 
-    curl_close($curlHandler);
+curl_close($curlHandler);
 
-    $obj = json_decode($response);
+ $obj = json_decode($response);
 
-    echo $obj->{'Clientes'};
+echo $obj->{'Clientes'};
 
   }
 
@@ -190,29 +190,10 @@ echo $obj->{'Total'};
   }
 
 
-  function topProductos($top,$fD,$fH,$codAlmacen){
-    $curlHandler = curl_init();
-    $data = array(
-    'top' => $top,
-    'fD' => $fD,
-    'fH' => $fH,
-    'codAlmacen' => $codAlmacen
-        );    
 
-    curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/topProductos',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLINFO_HEADER_OUT => true,
 
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => $data,
-    ]);
 
-    $response = curl_exec($curlHandler);
 
-      curl_close($curlHandler);
-      
-      return $response;
 
-  }
-  ?>
+?>
+ 

@@ -26,7 +26,7 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-laptop-windows"></i><span class="hide-menu">CLIENTES</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                 <li><a href="index.php">Listado</a></li>
+                                  <li><a  onclick="page('page/blanco.php')">Listado</a></li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">CUENTAS X COBRAR</span></a>

@@ -1,4 +1,8 @@
+ <script src="js/jquery-3.2.1.min.js"></script>
+ <script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.responsive.min.js"></script>
 <script src="../assets/plugins/jquery/jquery.min.js"></script>
+
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -26,11 +30,11 @@
     <script src="../assets/plugins/c3-master/c3.min.js"></script>
     <!-- Chart JS -->
     <script src="js/dashboard1.js"></script>
-    <script>loadData();</script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    
 
     <script src="ajax/funcion_page.js"></script>
     <script src="ajax/check.js"></script>

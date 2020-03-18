@@ -106,7 +106,5 @@
                     </div>
                     <!-- Column -->
                 </div>
-                <input type="hidden" id="cod_Almacen" value="<?php echo $_SESSION['target_almacen'];?>">
-                <div id="topP"></div>
 </div>  
 </div>  

@@ -1,8 +1,8 @@
- <script src="js/jquery-3.2.1.min.js"></script>
- <script src="js/jquery.dataTables.min.js"></script>
-<script src="js/dataTables.responsive.min.js"></script>
-<script src="../assets/plugins/jquery/jquery.min.js"></script>
 
+ 
+<script src="../assets/plugins/jquery/jquery.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.responsive.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>

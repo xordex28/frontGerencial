@@ -120,7 +120,7 @@ curl_close($curlHandler);
 
  $obj = json_decode($response);
  
-echo $obj->{'Total'};
+ echo number_format($obj->{'Total'},2,',','.');
 
   }
 
@@ -147,7 +147,7 @@ curl_close($curlHandler);
 
  $obj = json_decode($response);
  
-echo $obj->{'Total'};
+ echo number_format($obj->{'Total'},2,',','.');
 
   }
 
@@ -174,7 +174,7 @@ curl_close($curlHandler);
 
  $obj = json_decode($response);
  
-echo $obj->{'Total'};
+ echo number_format($obj->{'Total'},2,',','.');
 
 }
 
@@ -201,7 +201,7 @@ curl_close($curlHandler);
 
  $obj = json_decode($response);
  
-echo $obj->{'Total'};
+ echo number_format($obj->{'Total'},2,',','.');
 
   }
 

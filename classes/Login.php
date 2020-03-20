@@ -78,7 +78,7 @@ class Login
             //$_SESSION['nperfil'] = $$obj->{'nperfil'};
             $_SESSION['user_login_status'] = 1;
 
-            $_SESSION['target_almacen'] = 0;
+          
 
           
 

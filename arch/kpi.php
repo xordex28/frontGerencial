@@ -1,5 +1,21 @@
 <?php
  
+
+ function _data_last_month_day() { 
+    $month = date('m');
+    $year = date('Y');
+    $day = date("d", mktime(0,0,0, $month+1, 0, $year));
+
+    return date('Y-m-d', mktime(0,0,0, $month, $day, $year));
+};
+
+/** Actual month first day **/
+function _data_first_month_day() {
+    $month = date('m');
+    $year = date('Y');
+    return date('Y-m-d', mktime(0,0,0, $month, 1, $year));
+}
+
  function OnClientes($almacen){
   	$curlHandler = curl_init();
   	$data = array(
@@ -189,7 +205,31 @@ echo $obj->{'Total'};
 
   }
 
+  function topProductos($top,$fD,$fH,$codAlmacen){
+    $curlHandler = curl_init();
+    $data = array(
+    'top' => $top,
+    'fD' => $fD,
+    'fH' => $fH,
+    'codAlmacen' => $codAlmacen
+        );    
 
+    curl_setopt_array($curlHandler, [
+        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/topProductos',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLINFO_HEADER_OUT => true,
+
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => $data,
+    ]);
+
+    $response = curl_exec($curlHandler);
+
+      curl_close($curlHandler);
+      
+      return $response;
+
+  }
 
 
 

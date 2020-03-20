@@ -1,7 +1,6 @@
-
 <?php
 session_start();
-if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
+if (!isset($_SESSION['user_login_status']) and $_SESSION['user_login_status'] != 1) {
   header("location: login.php");
   exit;
 }
@@ -10,11 +9,13 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 <!DOCTYPE html>
 <html lang="es">
 <meta charset="UTF-8">
+
 <head>
   <?php
   include('dash/link.php');
   ?>
 </head>
+
 <body class="app sidebar-mini rtl">
   <!-- Navbar-->
   <?php
@@ -26,23 +27,35 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
   ?>
 
   <main class="app-content">
-   <div class="" id="div-results"></div>
- </main>
- <!-- Essential javascripts for application to work-->
- <?php
- include('dash/script.php');
- ?>
+    <div class="" id="div-results"></div>
+  </main>
+  <!-- Essential javascripts for application to work-->
+  <?php
+  include('dash/script.php');
+  ?>
 
 
- <script>
-  $(document).ready(function(){
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        type: "POST",
+        url: 'arch/session.php',
+        success: function(response) {
+          console.log(response);
+          if (!response) {
+            page('page/inicio.php');
+          }else{
+            page(response);
+          }
+        }
+      });
 
-    page('page/inicio.php');
 
-  });
-</script>
+    });
+  </script>
 
-<!-- Google analytics script-->
+  <!-- Google analytics script-->
 
 </body>
+
 </html>

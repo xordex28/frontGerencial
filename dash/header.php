@@ -39,15 +39,13 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
-                        </li>
+
                         <!-- ============================================================== -->
                         <!-- Messages -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown mega-dropdown" > <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-grid"></i></a>
-                            <div id="listAlmacen" class="dropdown-menu scale-up-left">
+                        <li class="nav-item dropdown mega-dropdown" >
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-grid"></i></a>
+                            <div class="dropdown-menu scale-up-left">
                                 <ul class="mega-dropdown-menu row">
 
                                    <li class="col-lg-3 m-b-30">
@@ -77,15 +75,22 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                                     curl_close($curlHandler);
 
                                      $obj = json_decode($response);
-                                     $_SESSION['target_almacen'] = $obj[0]->{'codalmacen'};
-                                     $_SESSION['descripcion_almacen'] = $obj[0]->{'descripcion'};
-                                     $i =0;
+                                     if(!isset($_SESSION['target_almacen'])){
+                                        $_SESSION['target_almacen'] = $obj[0]->{'codalmacen'};
+                                        $_SESSION['descripcion_almacen'] = $obj[0]->{'descripcion'};
+                                     }
                                  foreach ($obj as $key => $value){
                                   ?>
-                                    <input name="group1" type="radio" <?php echo ($i==0)?'checked="checked"':''; ?> id="<?php  echo $value->{'codalmacen'}; ?>" onclick="actualizar(this.id,'<?php echo $value->{'descripcion'}; ?>')" />
+
+                            
+                                    
+                                <input name="group1" type="radio" href="" <?php echo ($_SESSION['target_almacen'] == $value->{'codalmacen'})?'checked="checked"':''; ?> id="<?php  echo $value->{'codalmacen'}; ?>" onclick="actualizar(this.id,'<?php echo $value->{'descripcion'}; ?>')" />
                                     <label for="<?php echo $value->{'codalmacen'}; ?>"><?php echo $value->{'descripcion'}; ?></label>
+                                 
+                                
+                                 
+                                    
                                   <?php
-                                  $i++;
                                   }
                                   ?>
                                   <!--
@@ -142,6 +147,7 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                                 </ul>
                             </div>
                         </li>
+                        
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->
@@ -154,7 +160,7 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a style="color:white;" id="almacenSelect">Almacen: <?php echo $_SESSION['descripcion_almacen'];?></a>
                             <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-message"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
@@ -197,7 +203,7 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                    </li>
                         <!-- ============================================================== -->
                         <!-- End Comment -->
                         <!-- ============================================================== -->

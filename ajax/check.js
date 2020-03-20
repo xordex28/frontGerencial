@@ -7,6 +7,7 @@ function actualizar(id, descripcion) {
 			$(document).ready(function () {
 				page("page/inicio.php");
 				$("#almacenSelect").html('Almacen: ' + descripcion);
+				document.location = "";
 			});
 
 		},

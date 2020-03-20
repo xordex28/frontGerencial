@@ -1,15 +1,13 @@
-function actualizar(id){
-
+function actualizar(id, descripcion) {
 	$.ajax({
-		data:  {id:id},
-		url:   'arch/check.php',
-		type:  'post',
-		success:  function (response) {
-				console.log(response);
-			  $(document).ready(function(){
-    			page("page/inicio.php");
-
-  			});
+		data: { id: id, descripcion: descripcion },
+		url: 'arch/check.php',
+		type: 'post',
+		success: function (response) {
+			$(document).ready(function () {
+				page("page/inicio.php");
+				$("#almacenSelect").html('Almacen: ' + descripcion);
+			});
 
 		},
 		error: function (xhr, ajaxOptions, thrownError) {

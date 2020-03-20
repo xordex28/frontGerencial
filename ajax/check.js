@@ -5,7 +5,7 @@ function actualizar(id, descripcion) {
 		type: 'post',
 		success: function (response) {
 			$(document).ready(function () {
-				page("page/inicio.php");
+				reload();
 				$("#almacenSelect").html('Almacen: ' + descripcion);
 				document.location = "";
 			});

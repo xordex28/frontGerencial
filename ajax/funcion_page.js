@@ -2,80 +2,83 @@ function page(url) {
   $.ajax({
     type: "POST",
     url: url,
-    success: function(response) {
+    success: function (response) {
       $("#div-results").html(response);
+      if (url == "page/inicio.php") {
+        loadTopProductos();
+      }
     }
   });
 }
 
-function table_cliente(){
-  var dataTable=$('#tbcliente').DataTable({
-      "ajax":{
-          url:"module/table_cliente.php"
-      },
-          /*    initComplete: function (i,j) {
-          this.api().columns().every( function () {
-              var column = this;
-              var select = $('<select><option value=""></option></select>')
-                  .appendTo( $(column.footer()).empty() )
-                  .on( 'change', function () {
-                      var val = $.fn.dataTable.util.escapeRegex(
-                          $(this).val()
-                      );
+function table_cliente() {
+  var dataTable = $('#tbcliente').DataTable({
+    "ajax": {
+      url: "module/table_cliente.php"
+    },
+    /*    initComplete: function (i,j) {
+    this.api().columns().every( function () {
+        var column = this;
+        var select = $('<select><option value=""></option></select>')
+            .appendTo( $(column.footer()).empty() )
+            .on( 'change', function () {
+                var val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
 
-                      column
-                          .search( val ? '^'+val+'$' : '', true, false )
-                          .draw();
-                  } );
+                column
+                    .search( val ? '^'+val+'$' : '', true, false )
+                    .draw();
+            } );
 
-              column.data().unique().sort().each( function ( d, j ) {
-                  select.append( '<option value="'+d+'">'+d+'</option>' )
-              } );
-          } );*/
-      //},
-      responsive: {
-          details: {
-              type: 'column',
-              target: 'tr'
-          }
-      },
-      columnDefs: [ {
-          className: 'control',
-          orderable: false,
-          targets:   0
-      } ],
-      order: [ 2, 'des' ],
-   
+        column.data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+        } );
+    } );*/
+    //},
+    responsive: {
+      details: {
+        type: 'column',
+        target: 'tr'
+      }
+    },
+    columnDefs: [{
+      className: 'control',
+      orderable: false,
+      targets: 0
+    }],
+    order: [2, 'des'],
+
 
   });
-/*
-  $("#tbcliente tfoot th").each( function ( i ) {
-      var select = $('<select><option value=""></option></select>')
-          .appendTo( $(this).empty() )
-          .on( 'change', function () {
-              table.column( i )
-                  .search( $(this).val() )
-                  .draw();
-          } );
-
-      table.column( i ).data().unique().sort().each( function ( d, j ) {
-          select.append( '<option value="'+d+'">'+d+'</option>' )
-      } );
-  });
-
-  $("#tbcliente tfoot th").each( function ( i ) {
-      var select = $('<select><option value=""></option></select>')
-          .appendTo( $(this).empty() )
-          .on( 'change', function () {
-              table.column( i )
-                  .search( $(this).val() )
-                  .draw();
-          } );
-
-      table.column( i ).data().unique().sort().each( function ( d, j ) {
-          select.append( '<option value="'+d+'">'+d+'</option>' )
-      } );
-  });*/
+  /*
+    $("#tbcliente tfoot th").each( function ( i ) {
+        var select = $('<select><option value=""></option></select>')
+            .appendTo( $(this).empty() )
+            .on( 'change', function () {
+                table.column( i )
+                    .search( $(this).val() )
+                    .draw();
+            } );
+  
+        table.column( i ).data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+        } );
+    });
+  
+    $("#tbcliente tfoot th").each( function ( i ) {
+        var select = $('<select><option value=""></option></select>')
+            .appendTo( $(this).empty() )
+            .on( 'change', function () {
+                table.column( i )
+                    .search( $(this).val() )
+                    .draw();
+            } );
+  
+        table.column( i ).data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+        } );
+    });*/
 
 
 };
@@ -131,7 +134,7 @@ function nueva_asig(cliente, ubicacion, cargo, bono, valor) {
       bono: bono,
       valor: valor
     },
-    success: function(data) {
+    success: function (data) {
       console.log(data);
       if (data.trim() == "correcto") {
         toastr.success("Se Guardo Correctamente", "Exitoso", {
@@ -160,7 +163,7 @@ function nueva_asig(cliente, ubicacion, cargo, bono, valor) {
       // console.log(x);
       //recargar_table_auto();
     },
-    error: function(xhr, ajaOptions, thrownError) {
+    error: function (xhr, ajaOptions, thrownError) {
       console.log(thrownError);
       toastr.error(
         "Paso un Problema en el servidor contactar con Dtto Desarrollo",
@@ -180,7 +183,7 @@ function update_asig(id, valor) {
     url: "arch/update_asig.php",
     type: "POST",
     data: { id: id, valor: valor },
-    success: function(data) {
+    success: function (data) {
       console.log(data);
       if (data.trim() == "correcto") {
         toastr.success("Se Guardo Correctamente", "Exitoso", {
@@ -199,7 +202,7 @@ function update_asig(id, valor) {
         });
       }
     },
-    error: function(xhr, ajaOptions, thrownError) {
+    error: function (xhr, ajaOptions, thrownError) {
       console.log(thrownError);
       toastr.error(
         "Paso un Problema en el servidor contactar con Dtto Desarrollo",
@@ -225,10 +228,10 @@ function actualizacion_ibarti(start, end, contrato, mes, dia_end) {
       mes: mes,
       dia_end: dia_end
     },
-    beforeSend: function() {
+    beforeSend: function () {
       toastr.warning("Se esta Generando el TXT, Por Favor espere");
     },
-    success: function(data) {
+    success: function (data) {
       console.log(data);
       if (data.trim() == "correcto") {
         console.log(data);
@@ -250,7 +253,7 @@ function actualizacion_ibarti(start, end, contrato, mes, dia_end) {
         );
       }
     },
-    error: function(xhr, ajaOptions, thrownError) {
+    error: function (xhr, ajaOptions, thrownError) {
       console.log(thrownError);
       toastr.error(
         "Paso un Problema en el servidor contactar con Dtto Desarrollo",
@@ -284,10 +287,10 @@ function actualizacion_ibarti_semanal(
       dia_end: dia_end,
       porc
     },
-    beforeSend: function() {
+    beforeSend: function () {
       toastr.warning("Se esta Generando el TXT, Por Favor espere");
     },
-    success: function(data) {
+    success: function (data) {
       console.log(data);
       if (data.trim() == "correcto") {
         console.log(data);
@@ -309,7 +312,7 @@ function actualizacion_ibarti_semanal(
         );
       }
     },
-    error: function(xhr, ajaOptions, thrownError) {
+    error: function (xhr, ajaOptions, thrownError) {
       console.log(thrownError);
       toastr.error(
         "Paso un Problema en el servidor contactar con Dtto Desarrollo",
@@ -328,7 +331,7 @@ function reporte_asignacion() {
   $.ajax({
     url: "reportes/reporte_asignacion.php",
 
-    success: function(data) {
+    success: function (data) {
       console.log(data);
       if (data.trim() == "correcto") {
         console.log(data);
@@ -350,7 +353,7 @@ function reporte_asignacion() {
         );
       }
     },
-    error: function(data, xhr, ajaOptions, thrownError) {
+    error: function (data, xhr, ajaOptions, thrownError) {
       console.log(thrownError);
       console.log(data);
       toastr.error(
@@ -367,6 +370,7 @@ function reporte_asignacion() {
 }
 
 function loadTopProductos() {
+  console.log("h")
   let codA = $("#cod_Almacen").val();
   let fechaD = $("#fecDTopProducto").val();
   let fechaH = $("#fecHTopProducto").val();
@@ -382,9 +386,9 @@ function loadTopProductos() {
     url: "views/topProductos.php",
     type: "POST",
     data: data,
-    success: function(respuesta) {
+    success: function (respuesta) {
+      console.log(respuesta);
       const dataA = JSON.parse(respuesta);
-      console.log(dataA);
       if (dataA) {
         const labels = dataA.map(res => res.descripcion);
         const vals = dataA.map(res => Number(res.VENDIDOS));
@@ -398,7 +402,7 @@ function loadTopProductos() {
             labels: labels,
             datasets: [
               {
-                label: "Top #"+data.top+" Productos Vendidos",
+                label: "Top #" + data.top + " Productos Vendidos",
                 data: vals,
                 backgroundColor: colors,
                 borderWidth: 1
@@ -419,7 +423,7 @@ function loadTopProductos() {
         });
       }
     },
-    error: function() {
+    error: function () {
       console.log("No se ha podido obtener la información");
     }
   });

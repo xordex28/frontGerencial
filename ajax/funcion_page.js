@@ -338,7 +338,7 @@ function loadTopProductos() {
             labels: labels,
             datasets: [
               {
-                label: "# of Votes",
+                label: "Top #"+data.top+" Productos Vendidos",
                 data: vals,
                 backgroundColor: colors,
                 borderWidth: 1

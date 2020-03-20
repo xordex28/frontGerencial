@@ -28,8 +28,13 @@
     <!--c3 JavaScript -->
     <script src="../assets/plugins/d3/d3.min.js"></script>
     <script src="../assets/plugins/c3-master/c3.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
     <!-- Chart JS -->
-    <script src="js/dashboard1.js"></script>
+    <!-- <script src="js/dashboard1.js"></script> -->
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->

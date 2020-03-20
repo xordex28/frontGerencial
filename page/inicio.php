@@ -113,21 +113,24 @@ include('../arch/kpi.php');
             </div>
             <!-- Column -->
         </div>
-        <div class="col-lg-12 col-md-12">
-            TOP PRODUCTOS MAS VENDIDOS
-            <div class="col-lg-12 col-md-12">
-            <span><strong>Fecha Desde:</strong> <input type="date" name="" id="fecDTopProducto"></span>
-            <span><b>Fecha Hasta:</b> <input type="date" name="" id="fecHTopProducto"></span>
-            <span><b>Top:</b> <select name="" id="topProducto">
-                <option value="1">#1</option>
-                <option value="5">#5</option>
-                <option value="10">#10</option>
-                <option value="20">#20</option>
-                <option value="50">#50</option>
-            </select></span>
-            <span><button type="button" onclick="loadTopProductos()" >Actualizar</button></span>
-        </div>
-            <div id="topP"></div>
+        <div class="col-lg-12 col-md-12" style="display: grid;grid-row-gap: 10px;">
+            <span>TOP PRODUCTOS MAS VENDIDOS</span>
+            <!-- <button type="button" onclick="{$('#configTP').show();}">Configurar Producto</button> -->
+            <div class="col-lg-12 col-md-12" id="configTP" style="display: block;">
+                <span><strong>Fecha Desde:</strong> <input type="date" value="<?php echo _data_first_month_day(); ?>" name="" id="fecDTopProducto"></span>
+                <span><b>Fecha Hasta:</b> <input type="date" value="<?php echo _data_last_month_day(); ?>" name="" id="fecHTopProducto"></span>
+                <span><b>Top:</b> <select name="" id="topProducto">
+                        <option value="1">#1</option>
+                        <option value="5">#5</option>
+                        <option value="10">#10</option>
+                        <option value="20">#20</option>
+                        <option value="50">#50</option>
+                    </select></span>
+                <span><button type="button" onclick="loadTopProductos()">Actualizar</button></span>
+            </div>
+            <div id="topPC">
+
+            </div>
         </div>
         <input type="hidden" id="cod_Almacen" value="<?php echo $_SESSION['target_almacen']; ?>">
 

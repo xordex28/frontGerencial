@@ -1,5 +1,21 @@
 <?php
  
+
+ function _data_last_month_day() { 
+    $month = date('m');
+    $year = date('Y');
+    $day = date("d", mktime(0,0,0, $month+1, 0, $year));
+
+    return date('Y-m-d', mktime(0,0,0, $month, $day, $year));
+};
+
+/** Actual month first day **/
+function _data_first_month_day() {
+    $month = date('m');
+    $year = date('Y');
+    return date('Y-m-d', mktime(0,0,0, $month, 1, $year));
+}
+
  function OnClientes($almacen){
   	$curlHandler = curl_init();
   	$data = array(

@@ -2,8 +2,16 @@ function page(url) {
   $.ajax({
     type: "POST",
     url: url,
-    success: function (response) {
+    success: function(response) {
       $("#div-results").html(response);
+      $.ajax({
+        type: "POST",
+        data: { page: url },
+        url: "arch/session.php",
+        success: function(response) {
+          console.log(response);
+        }
+      });
       if (url == "page/inicio.php") {
         loadTopProductos();
       }
@@ -11,30 +19,40 @@ function page(url) {
   });
 }
 
+function reload(){
+  $.ajax({
+    type: "POST",
+    url: "arch/session.php",
+    success: function(response) {
+      page(response);
+    }
+  });
+}
+
 function table_cliente() {
-  var dataTable = $('#tbcliente').DataTable({
-    "ajax": {
+  var dataTable = $("#tbcliente").DataTable({
+    ajax: {
       url: "module/table_cliente.php"
     },
     responsive: {
       details: {
-        type: 'column',
-        target: 'tr'
+        type: "column",
+        target: "tr"
       }
     },
-    columnDefs: [{
-      className: 'control',
-      orderable: false,
-      targets: 0
-    }],
-    order: [2, 'des'],
-
-
+    columnDefs: [
+      {
+        className: "control",
+        orderable: false,
+        targets: 0
+      }
+    ],
+    order: [2, "des"]
   });
-};
+}
 
 function loadTopProductos() {
-  console.log("h")
+  console.log("h");
   let codA = $("#cod_Almacen").val();
   let fechaD = $("#fecDTopProducto").val();
   let fechaH = $("#fecHTopProducto").val();
@@ -50,7 +68,7 @@ function loadTopProductos() {
     url: "views/topProductos.php",
     type: "POST",
     data: data,
-    success: function (respuesta) {
+    success: function(respuesta) {
       console.log(respuesta);
       const dataA = JSON.parse(respuesta);
       if (dataA) {
@@ -87,7 +105,7 @@ function loadTopProductos() {
         });
       }
     },
-    error: function () {
+    error: function() {
       console.log("No se ha podido obtener la información");
     }
   });

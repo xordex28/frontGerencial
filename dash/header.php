@@ -9,7 +9,7 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand"onclick="page('page/inicio.php')" href="./">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->

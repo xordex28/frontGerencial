@@ -61,7 +61,7 @@ function loadTopProductos() {
         var ctx = document.getElementById("topP").getContext("2d");
         console.log(colors);
         var myChart = new Chart(ctx, {
-          type: "bar",
+          type: "horizontalBar",
           data: {
             labels: labels,
             datasets: [

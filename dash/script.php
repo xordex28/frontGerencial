@@ -29,7 +29,7 @@
     <script src="../assets/plugins/d3/d3.min.js"></script>
     <script src="../assets/plugins/c3-master/c3.min.js"></script>
     <!-- Chart JS -->
-    <script src="js/dashboard1.js"></script>
+    <!--<script src="js/dashboard1.js"></script>-->
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->

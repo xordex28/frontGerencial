@@ -8,30 +8,50 @@
 <div class="container-fluid">
   <br>
   <h4>Asignacion</h4>
-
+<div style="max-width: 80vw;overflow: auto;">
 <table id="tbcliente" class="display compact" cellspacing="0" >
         <thead>
             <tr>
-                <th width="1%"></th>
-                <th width="5%">Cedula</th>
-                <th width="5%">Nombre</th>
-                <th width="5%">Contacto</th>
-                <th width="5%">tlf1</th>
-                <th width="5%">tlf2.</th>
-                <th width="5%">pais</th>
-                <th width="5%">estado</th>
-                <th width="5%">ciudad</th>
-                <th width="5%">municipio</th>
-                <th width="5%">direccion</th>
-                <th width="5%">zona</th>
-                <th width="5%">canal</th>
-                <th width="5%">email</th>
-                <th width="5%">status</th>
+                <th></th>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>tlf1</th>
+                <th>tlf2.</th>
+                <th>pais</th>
+                <th>estado</th>
+                <th>ciudad</th>
+                <th>municipio</th>
+                <th>direccion</th>
+                <th>zona</th>
+                <th>canal</th>
+                <th>email</th>
+                <th>status</th>
             </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>tlf1</th>
+                <th>tlf2.</th>
+                <th>pais</th>
+                <th>estado</th>
+                <th>ciudad</th>
+                <th>municipio</th>
+                <th>direccion</th>
+                <th>zona</th>
+                <th>canal</th>
+                <th>email</th>
+                <th>status</th>
+            </tr>
+        </tfoot>
 
 
     </table>
+    <div>
 <script>
   
 

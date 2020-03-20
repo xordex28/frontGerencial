@@ -8,7 +8,8 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+<meta charset="UTF-8">
 <head>
   <?php
   include('dash/link.php');

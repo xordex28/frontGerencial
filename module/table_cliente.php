@@ -1,8 +1,12 @@
+
+
 <?php
-    $request=$_REQUEST;
-    $col =array(
-      0   =>  'id',
-      1   =>  'descripcion'
-); 
-    
+ session_start(); 
+ include('../arch/datatables.php');
+
+ $clientes =  GetClientes($_SESSION['target_almacen']);
+
+ echo $clientes;
+ 
+
 ?>

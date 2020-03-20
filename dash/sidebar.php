@@ -20,7 +20,7 @@
                         <li class="nav-small-cap">PERSONAL</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">INVENTARIO </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#" onclick="page('page/blanco.php')">Listado</a></li>
+                                <li><a onclick="page('page/blanco_1.php')">Listado</a></li>
                                 
                             </ul>
                         </li>

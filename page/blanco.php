@@ -1,53 +1,65 @@
+ 
 
+<?php
+ session_start(); 
+ include('../arch/datatables.php');
+ ?>   
 <div class="page-wrapper">
 <div class="container-fluid">
   <br>
-  <div class="container">
-   <h1 align="center">Datatables Individual column searching using PHP Ajax Jquery</h1>
-   <br />
-   
-   <div class="table-responsive">
-    <table id="product_data" class="table table-bordered table-striped">
-     <thead>
-      <tr>
-       <th>Sr. No.</th>
-       <th>Product Name</th>
-       <th>
-        <select name="category" id="category" class="form-control">
-         <option value="">Category Search</option>
-         <?php 
-         while($row = mysqli_fetch_array($result))
-         {
-          echo '<option value="'.$row["category_id"].'">'.$row["category_name"].'</option>';
-         }
-         ?>
-        </select>
-       </th>
-       <th>Product Price</th>
-      </tr>
-     </thead>
+  <h4>Asignacion</h4>
+<div style="max-width: 80vw;overflow: auto;">
+<table id="tbcliente" class="display compact" cellspacing="0" >
+        <thead>
+            <tr>
+                <th></th>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>tlf1</th>
+                <th>tlf2.</th>
+                <th>pais</th>
+                <th>estado</th>
+                <th>ciudad</th>
+                <th>municipio</th>
+                <th>direccion</th>
+                <th>zona</th>
+                <th>canal</th>
+                <th>email</th>
+                <th>status</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>tlf1</th>
+                <th>tlf2.</th>
+                <th>pais</th>
+                <th>estado</th>
+                <th>ciudad</th>
+                <th>municipio</th>
+                <th>direccion</th>
+                <th>zona</th>
+                <th>canal</th>
+                <th>email</th>
+                <th>status</th>
+            </tr>
+        </tfoot>
+
+
     </table>
-   </div>
-  </div>
-
-
-</div>  
-</div>  
-
+    <div>
 <script>
+  
 
- $(document).on('change', '#category', function(){
-  var category = $(this).val();
-  $('#product_data').DataTable().destroy();
-  if(category != '')
-  {
-   load_data(category);
-  }
-  else
-  {
-   load_data();
-  }
- });
+    $(document).ready(function(){
+       table_cliente();
 
+   });
+    </script>
 
-</script>
+</div>  
+</div>  

@@ -205,7 +205,11 @@ echo $obj->{'Total'};
 
   }
 
+<<<<<<< HEAD
   function topProductos($top,$fD,$fH,$codAlmacen){
+=======
+    function topProductos($top,$fD,$fH,$codAlmacen){
+>>>>>>> eliezer
     $curlHandler = curl_init();
     $data = array(
     'top' => $top,
@@ -222,6 +226,18 @@ echo $obj->{'Total'};
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => $data,
     ]);
+<<<<<<< HEAD
+=======
+
+    $response = curl_exec($curlHandler);
+
+      curl_close($curlHandler);
+      
+      return $response;
+
+  }
+
+>>>>>>> eliezer
 
     $response = curl_exec($curlHandler);
 

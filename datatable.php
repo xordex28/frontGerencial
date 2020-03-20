@@ -512,7 +512,7 @@
         table.column( i ).data().unique().sort().each( function ( d, j ) {
             select.append( '<option value="'+d+'">'+d+'</option>' )
         } );
-    } );
+    });
 } );
   </script>
  </body>

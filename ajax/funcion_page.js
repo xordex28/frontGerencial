@@ -19,6 +19,16 @@ function page(url) {
   });
 }
 
+function reload(){
+  $.ajax({
+    type: "POST",
+    url: "arch/session.php",
+    success: function(response) {
+      page(response);
+    }
+  });
+}
+
 function table_cliente() {
   var dataTable = $("#tbcliente").DataTable({
     ajax: {

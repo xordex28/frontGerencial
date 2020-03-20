@@ -1,5 +1,3 @@
-
- 
 <script src="../assets/plugins/jquery/jquery.min.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.responsive.min.js"></script>
@@ -34,11 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
     <!-- Chart JS -->
-<<<<<<< HEAD
     <!-- <script src="js/dashboard1.js"></script> -->
-=======
-    <!--<script src="js/dashboard1.js"></script>-->
->>>>>>> eliezer
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->

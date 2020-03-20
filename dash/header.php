@@ -76,12 +76,14 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                                     curl_close($curlHandler);
 
                                      $obj = json_decode($response);
-
+                                     $_SESSION['target_almacen'] = $obj[0]->{'codalmacen'};
+                                     $i =0;
                                  foreach ($obj as $key => $value){
                                   ?>
-                                    <input name="group1" type="radio" id="<?php  echo $value->{'codalmacen'}; ?>" onclick="actualizar(this.id)" />
+                                    <input name="group1" type="radio" <?php echo ($i==0)?'checked="checked"':''; ?> id="<?php  echo $value->{'codalmacen'}; ?>" onclick="actualizar(this.id)" />
                                     <label for="<?php echo $value->{'codalmacen'}; ?>"><?php echo $value->{'descripcion'}; ?></label>
                                   <?php
+                                  $i++;
                                   }
                                   ?>
                                   <!--

@@ -7,7 +7,7 @@
 <div class="page-wrapper">
 <div class="container-fluid">
   <br>
-  <h4>Asignacion</h4>
+  <h4>Clientes</h4>
 <div style="max-width: 80vw;overflow: auto;">
 <table id="tbcliente" class="display compact" cellspacing="0" >
         <thead>

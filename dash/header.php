@@ -32,6 +32,7 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav mr-auto mt-md-0">
+                         
                         <!-- This is  -->
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
@@ -45,8 +46,8 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                         <!-- ============================================================== -->
                         <!-- Messages -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-grid"></i></a>
-                            <div class="dropdown-menu scale-up-left">
+                        <li class="nav-item dropdown mega-dropdown" > <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-grid"></i></a>
+                            <div id="listAlmacen" class="dropdown-menu scale-up-left">
                                 <ul class="mega-dropdown-menu row">
 
                                    <li class="col-lg-3 m-b-30">
@@ -77,10 +78,11 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
 
                                      $obj = json_decode($response);
                                      $_SESSION['target_almacen'] = $obj[0]->{'codalmacen'};
+                                     $_SESSION['descripcion_almacen'] = $obj[0]->{'descripcion'};
                                      $i =0;
                                  foreach ($obj as $key => $value){
                                   ?>
-                                    <input name="group1" type="radio" <?php echo ($i==0)?'checked="checked"':''; ?> id="<?php  echo $value->{'codalmacen'}; ?>" onclick="actualizar(this.id)" />
+                                    <input name="group1" type="radio" <?php echo ($i==0)?'checked="checked"':''; ?> id="<?php  echo $value->{'codalmacen'}; ?>" onclick="actualizar(this.id,'<?php echo $value->{'descripcion'}; ?>')" />
                                     <label for="<?php echo $value->{'codalmacen'}; ?>"><?php echo $value->{'descripcion'}; ?></label>
                                   <?php
                                   $i++;
@@ -148,10 +150,12 @@ require_once ("config/db.php");//Contiene las variables de configuracion para co
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
+                    
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
+                        <a style="color:white;" id="almacenSelect">Almacen: <?php echo $_SESSION['descripcion_almacen'];?></a>
                             <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-message"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>

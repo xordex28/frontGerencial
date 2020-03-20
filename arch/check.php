@@ -2,6 +2,7 @@
    session_start(); 
 
   $id = $_POST['id'];
+  $descripcion = isset($_POST['descripcion'])?$_POST['descripcion']:'';
   $_SESSION['target_almacen'] = $id;
-  echo  $_SESSION['target_almacen'];
+  $_SESSION['descripcion_almacen'] = $descripcion;
 ?>

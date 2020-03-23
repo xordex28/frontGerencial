@@ -29,7 +29,7 @@
   
 
     $(document).ready(function(){
-       table_inventario();
+        table_inventario();
 
    });
     </script>

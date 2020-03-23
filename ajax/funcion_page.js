@@ -62,14 +62,14 @@ function table_cliente() {
 
 }
 
-function table_inventario(id) {
+function table_inventario() {
 
   $(document).ready(function() {
     var dataTable = $('#tbinventory').removeAttr('width').DataTable( {
     ajax: {
       url: "module/table_inventory.php",
       type:"post",
-      data:  {id:id}
+      data:  {}
     },
     responsive: {
       details: {

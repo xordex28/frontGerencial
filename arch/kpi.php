@@ -231,7 +231,68 @@ curl_close($curlHandler);
 
   }
 
+  function topClientes($top,$fD,$fH,$codAlmacen,$zona,$canal,$moneda){
+    $curlHandler = curl_init();
+    $data = array(
+    'top' => $top,
+    'fD' => $fD,
+    'fH' => $fH,
+    'codAlmacen' => $codAlmacen,
+    'zona' => $zona,
+    'canal' => $canal,
+    'moneda' => $moneda
+        );    
 
+    curl_setopt_array($curlHandler, [
+        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/topClientes',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLINFO_HEADER_OUT => true,
+
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => $data,
+    ]);
+
+    $response = curl_exec($curlHandler);
+
+      curl_close($curlHandler);
+      
+      return $response;
+
+  }
+
+  function getZona(){
+    $curlHandler = curl_init();
+
+    curl_setopt_array($curlHandler, [
+        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/getZonas',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLINFO_HEADER_OUT => true,
+    ]);
+
+    $response = curl_exec($curlHandler);
+
+      curl_close($curlHandler);
+      
+      return $response;
+
+  }
+
+  function getCanal(){
+    $curlHandler = curl_init();
+
+    curl_setopt_array($curlHandler, [
+        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/getCanal',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLINFO_HEADER_OUT => true,
+    ]);
+
+    $response = curl_exec($curlHandler);
+
+      curl_close($curlHandler);
+      
+      return $response;
+
+  }
 
 
 

@@ -2,13 +2,13 @@ function page(url) {
   $.ajax({
     type: "POST",
     url: url,
-    success: function(response) {
+    success: function (response) {
       $("#div-results").html(response);
       $.ajax({
         type: "POST",
-        data: { page: url },
+        data: { page: url},
         url: "arch/session.php",
-        success: function(response) {
+        success: function (response) {
           console.log(response);
         }
       });
@@ -19,18 +19,20 @@ function page(url) {
   });
 }
 
-function reload(){
+function reload() {
   $.ajax({
     type: "POST",
     url: "arch/session.php",
-    success: function(response) {
+    success: function (response) {
       page(response);
     }
   });
 }
 
 function table_cliente() {
-  var dataTable = $("#tbcliente").DataTable({
+
+  $(document).ready(function() {
+    var dataTable = $('#tbcliente').removeAttr('width').DataTable( {
     ajax: {
       url: "module/table_cliente.php"
     },
@@ -40,15 +42,90 @@ function table_cliente() {
         target: "tr"
       }
     },
-    columnDefs: [
-      {
-        className: "control",
-        orderable: false,
-        targets: 0
-      }
-    ],
-    order: [2, "des"]
+
+        scrollY:        false,
+        scrollX:        false,
+        scrollCollapse: true,
+        paging:         true,
+                columnDefs: [
+            { className: 'control',
+            orderable: false, targets: 0 },
+            { width: 100, targets: 1 },
+             { width: 300, targets: 2 }
+
+
+        ],
+        fixedColumns: true
   });
+   
+});
+
+}
+
+function table_inventario() {
+
+  $(document).ready(function() {
+    var dataTable = $('#tbinventory').removeAttr('width').DataTable( {
+    ajax: {
+      url: "module/table_inventory.php",
+      type:"post",
+      data:  {}
+    },
+    responsive: {
+      details: {
+        type: "column",
+        target: "tr"
+      }
+    },
+
+        scrollY:        false,
+        scrollX:        false,
+        scrollCollapse: true,
+        paging:         true,
+                columnDefs: [
+            { className: 'control',
+            orderable: false, targets: 0 },
+            { width: 100, targets: 1 },
+             { width: 300, targets: 2 }
+
+
+        ],
+        fixedColumns: true
+  });
+   
+} );
+
+}
+
+function loadTopClientes() {
+  console.log("h");
+  let codA = $("#cod_Almacen").val();
+  let fechaD = $("#fecDTopCliente").val();
+  let fechaH = $("#fecHTopCliente").val();
+  let topCliente = $("#topCliente").val();
+  let zona = $("#zonaTopCliente").val();
+  let canal = $("#canalTopCliente").val();
+  let moneda = $("#monedaTopCliente").val();
+  const data = {
+    moneda: moneda,
+    top: topCliente,
+    fechaD: fechaD,
+    fechaH: fechaH,
+    cod_almacen: codA,
+    zona: zona,
+    canal: canal
+  };
+  console.log(data);
+  buildGraphBar(
+    "topCC",
+    "views/topClientes.php",
+    data,
+    "POST",
+    "str_cliente_nombres",
+    "ventas",
+    "Top #" + data.top + " Venta Cliente",
+    true
+  );
 }
 
 function loadTopProductos() {
@@ -63,53 +140,16 @@ function loadTopProductos() {
     fechaH: fechaH,
     cod_almacen: codA
   };
-
-  $.ajax({
-    url: "views/topProductos.php",
-    type: "POST",
-    data: data,
-    success: function(respuesta) {
-      console.log(respuesta);
-      const dataA = JSON.parse(respuesta);
-      if (dataA) {
-        const labels = dataA.map(res => res.descripcion);
-        const vals = dataA.map(res => Number(res.VENDIDOS));
-        const colors = dataA.map(() => getRandomColor());
-        $("#topPC").html('<canvas id="topP"></canvas>');
-        var ctx = document.getElementById("topP").getContext("2d");
-        console.log(colors);
-        var myChart = new Chart(ctx, {
-          type: "horizontalBar",
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                label: "Top #" + data.top + " Productos Vendidos",
-                data: vals,
-                backgroundColor: colors,
-                borderWidth: 1
-              }
-            ]
-          },
-          options: {
-            scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }
-              ]
-            }
-          }
-        });
-      }
-    },
-    error: function() {
-      console.log("No se ha podido obtener la información");
-    }
-  });
-  // $('#configTP').hide();
+  buildGraphBar(
+    "topPC",
+    "views/topProductos.php",
+    data,
+    "POST",
+    "descripcion",
+    "VENDIDOS",
+    "Top #" + data.top + " Productos Vendidos",
+    true
+  );
 }
 
 function getRandomColor() {
@@ -119,4 +159,69 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+function buildGraphBar(
+  idContainer,
+  urlAjax,
+  dataAjax,
+  methodAjax,
+  nameT,
+  nameV,
+  titulo,
+  horizontal
+) {
+  var myChart;
+  if (urlAjax && idContainer && dataAjax && nameT && nameV) {
+    $.ajax({
+      url: urlAjax,
+      type: methodAjax,
+      data: dataAjax,
+      success: function(respuesta) {
+        console.log(respuesta);
+        const dataA = JSON.parse(respuesta);
+        if (dataA["res"] && dataA["res"].length > 0) {
+          const labels = dataA["res"].map(res => res[nameT]);
+          const vals = dataA["res"].map(res => Number(res[nameV]));
+          const colors = dataA["res"].map(() => getRandomColor());
+          $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
+          var ctx = document.getElementById(`${idContainer}P`).getContext("2d");
+          myChart = new Chart(ctx, {
+            type: !horizontal ? "bar" : "horizontalBar",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: titulo,
+                  data: vals,
+                  backgroundColor: colors,
+                  borderWidth: 1
+                }
+              ]
+            },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    display: horizontal
+                  }
+                ],
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  }
+                ]
+              }
+            }
+          });
+        }
+      },
+      error: function() {
+        console.log("No se ha podido obtener la información");
+      }
+    });
+  }
+  return myChart;
 }

@@ -2,13 +2,13 @@ function page(url) {
   $.ajax({
     type: "POST",
     url: url,
-    success: function(response) {
+    success: function (response) {
       $("#div-results").html(response);
       $.ajax({
         type: "POST",
-        data: { page: url },
+        data: { page: url},
         url: "arch/session.php",
-        success: function(response) {
+        success: function (response) {
           console.log(response);
         }
       });
@@ -23,14 +23,16 @@ function reload() {
   $.ajax({
     type: "POST",
     url: "arch/session.php",
-    success: function(response) {
+    success: function (response) {
       page(response);
     }
   });
 }
 
 function table_cliente() {
-  var dataTable = $("#tbcliente").DataTable({
+
+  $(document).ready(function() {
+    var dataTable = $('#tbcliente').removeAttr('width').DataTable( {
     ajax: {
       url: "module/table_cliente.php"
     },
@@ -40,15 +42,59 @@ function table_cliente() {
         target: "tr"
       }
     },
-    columnDefs: [
-      {
-        className: "control",
-        orderable: false,
-        targets: 0
-      }
-    ],
-    order: [2, "des"]
+
+        scrollY:        false,
+        scrollX:        false,
+        scrollCollapse: true,
+        paging:         true,
+                columnDefs: [
+            { className: 'control',
+            orderable: false, targets: 0 },
+            { width: 100, targets: 1 },
+             { width: 300, targets: 2 }
+
+
+        ],
+        fixedColumns: true
   });
+   
+});
+
+}
+
+function table_inventario() {
+
+  $(document).ready(function() {
+    var dataTable = $('#tbinventory').removeAttr('width').DataTable( {
+    ajax: {
+      url: "module/table_inventory.php",
+      type:"post",
+      data:  {}
+    },
+    responsive: {
+      details: {
+        type: "column",
+        target: "tr"
+      }
+    },
+
+        scrollY:        false,
+        scrollX:        false,
+        scrollCollapse: true,
+        paging:         true,
+                columnDefs: [
+            { className: 'control',
+            orderable: false, targets: 0 },
+            { width: 100, targets: 1 },
+             { width: 300, targets: 2 }
+
+
+        ],
+        fixedColumns: true
+  });
+   
+} );
+
 }
 
 function loadTopClientes() {

@@ -114,7 +114,7 @@ include('../arch/kpi.php');
             <!-- Column -->
         </div>
         <div class="row">
-            <div class="col-lg-12 col-md-12" style=" margin-bottom:10px;padding:5px; border:1px solid; ">
+            <div class="col-lg-12 col-md-12" style=" margin-bottom:10px;padding:5px;  ">
                 <h3 class="col-lg-12 col-md-12 card-title">TOP PRODUCTOS MAS VENDIDOS</h3>
                 <div id="configTopPC">
                     <!-- <button type="button" onclick="{$('#configTP').show();}">Configurar Producto</button> -->
@@ -143,7 +143,7 @@ include('../arch/kpi.php');
 
                 </div>
             </div>
-            <div class="col-lg-12 col-md-12 row" style=" margin:0px;padding:5px; border:1px solid; ">
+            <div class="col-lg-12 col-md-12 row" style=" margin:0px;padding:5px;  ">
                 <h3 class="col-lg-12 col-md-12 card-title">TOP VENTAS DE CLIENTES</h3>
                 <div id="configTopCliente">
                     <!-- <button type="button" onclick="{$('#configTP').show();}">Configurar Producto</button> -->

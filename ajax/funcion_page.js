@@ -30,9 +30,7 @@ function reload() {
 }
 
 function table_cliente() {
-
-  $(document).ready(function() {
-    var dataTable = $('#tbcliente').removeAttr('width').DataTable( {
+  var dataTable = $('#tbcliente').removeAttr('width').DataTable( {
     ajax: {
       url: "module/table_cliente.php"
     },
@@ -43,57 +41,49 @@ function table_cliente() {
       }
     },
 
-        scrollY:        false,
-        scrollX:        false,
-        scrollCollapse: true,
-        paging:         true,
-                columnDefs: [
-            { className: 'control',
-            orderable: false, targets: 0 },
-            { width: 100, targets: 1 },
-             { width: 300, targets: 2 }
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: true,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0 },
+    { width: 100, targets: 1 },
+    { width: 300, targets: 2 }
 
 
-        ],
-        fixedColumns: true
+    ],
+    fixedColumns: true
   });
-   
-});
 
 }
 
-function table_inventario() {
-
-  $(document).ready(function() {
-    var dataTable = $('#tbinventory').removeAttr('width').DataTable( {
-    ajax: {
-      url: "module/table_inventory.php",
-      type:"post",
-      data:  {}
-    },
-    responsive: {
-      details: {
-        type: "column",
-        target: "tr"
-      }
+function table_inventario(moneda,iva) {
+ var dataTable = $('#tbinventory').removeAttr('width').DataTable( {
+  ajax: {
+    url: "module/table_inventory.php",
+    type:"post",
+    data:  {moneda:moneda,iva:iva}
+  },
+  responsive: {
+    details: {
+      type: "column",
+      target: "tr"
+    }
     },
 
-        scrollY:        false,
-        scrollX:        false,
-        scrollCollapse: true,
-        paging:         true,
-                columnDefs: [
-            { className: 'control',
-            orderable: false, targets: 0 },
-            { width: 100, targets: 1 },
-             { width: 300, targets: 2 }
-
-
-        ],
-        fixedColumns: true
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: true,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0 },
+    { width: 100, targets: 1 },
+    { width: 300, targets: 2 }
+    ],
+    fixedColumns: true
   });
-   
-} );
 
 }
 
@@ -125,7 +115,7 @@ function loadTopClientes() {
     "ventas",
     "Top #" + data.top + " Venta Cliente",
     true
-  );
+    );
 }
 
 function loadTopProductos() {
@@ -149,7 +139,7 @@ function loadTopProductos() {
     "VENDIDOS",
     "Top #" + data.top + " Productos Vendidos",
     true
-  );
+    );
 }
 
 function getRandomColor() {
@@ -170,7 +160,7 @@ function buildGraphBar(
   nameV,
   titulo,
   horizontal
-) {
+  ) {
   var myChart;
   if (urlAjax && idContainer && dataAjax && nameT && nameV) {
     $.ajax({
@@ -191,27 +181,27 @@ function buildGraphBar(
             data: {
               labels: labels,
               datasets: [
-                {
-                  label: titulo,
-                  data: vals,
-                  backgroundColor: colors,
-                  borderWidth: 1
-                }
+              {
+                label: titulo,
+                data: vals,
+                backgroundColor: colors,
+                borderWidth: 1
+              }
               ]
             },
             options: {
               scales: {
                 xAxes: [
-                  {
-                    display: horizontal
-                  }
+                {
+                  display: horizontal
+                }
                 ],
                 yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true
-                    }
+                {
+                  ticks: {
+                    beginAtZero: true
                   }
+                }
                 ]
               }
             }

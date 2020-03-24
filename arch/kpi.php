@@ -205,13 +205,15 @@ curl_close($curlHandler);
 
   }
 
-  function topProductos($top,$fD,$fH,$codAlmacen){
+  function topProductos($top,$fD,$fH,$codAlmacen,$linea,$subLinea){
     $curlHandler = curl_init();
     $data = array(
     'top' => $top,
     'fD' => $fD,
     'fH' => $fH,
-    'codAlmacen' => $codAlmacen
+    'codAlmacen' => $codAlmacen,
+    'linea' => $linea,
+    'subLinea' => $subLinea
         );    
 
     curl_setopt_array($curlHandler, [
@@ -260,6 +262,33 @@ curl_close($curlHandler);
 
   }
 
+  function topVendedores($top,$fD,$fH,$codAlmacen,$moneda){
+    $curlHandler = curl_init();
+    $data = array(
+    'top' => $top,
+    'fD' => $fD,
+    'fH' => $fH,
+    'codAlmacen' => $codAlmacen,
+    'moneda' => $moneda
+        );    
+
+    curl_setopt_array($curlHandler, [
+        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/topVendedores',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLINFO_HEADER_OUT => true,
+
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => $data,
+    ]);
+
+    $response = curl_exec($curlHandler);
+
+      curl_close($curlHandler);
+      
+      return $response;
+
+  }
+
   function getZona(){
     $curlHandler = curl_init();
 
@@ -282,6 +311,49 @@ curl_close($curlHandler);
 
     curl_setopt_array($curlHandler, [
         CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/getCanal',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLINFO_HEADER_OUT => true,
+    ]);
+
+    $response = curl_exec($curlHandler);
+
+      curl_close($curlHandler);
+      
+      return $response;
+
+  }
+
+  function getLinea(){
+    $curlHandler = curl_init();
+
+    curl_setopt_array($curlHandler, [
+        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/getLinea',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLINFO_HEADER_OUT => true,
+    ]);
+
+    $response = curl_exec($curlHandler);
+
+      curl_close($curlHandler);
+      
+      return $response;
+
+  }
+
+  function getSublinea($linea){
+    $curlHandler = curl_init();
+    $url = "";
+    if(isset($linea)){
+        if($linea!=""){
+            $url ="http://oesvica.ddns.net:9011/slimframework_v3/getSubLinea/".$linea;
+        }else{
+            $url = "http://oesvica.ddns.net:9011/slimframework_v3/getSubLinea";
+        }
+    }else{
+        $url = "http://oesvica.ddns.net:9011/slimframework_v3/getSubLinea";
+    }
+    curl_setopt_array($curlHandler, [
+        CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLINFO_HEADER_OUT => true,
     ]);

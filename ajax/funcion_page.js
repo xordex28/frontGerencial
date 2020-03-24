@@ -32,64 +32,60 @@ function reload() {
 }
 
 function table_cliente() {
-  $(document).ready(function() {
-    var dataTable = $("#tbcliente")
-      .removeAttr("width")
-      .DataTable({
-        ajax: {
-          url: "module/table_cliente.php"
-        },
-        responsive: {
-          details: {
-            type: "column",
-            target: "tr"
-          }
-        },
+  var dataTable = $('#tbcliente').removeAttr('width').DataTable( {
+    ajax: {
+      url: "module/table_cliente.php"
+    },
+    responsive: {
+      details: {
+        type: "column",
+        target: "tr"
+      }
+    },
 
-        scrollY: false,
-        scrollX: false,
-        scrollCollapse: true,
-        paging: true,
-        columnDefs: [
-          { className: "control", orderable: false, targets: 0 },
-          { width: 100, targets: 1 },
-          { width: 300, targets: 2 }
-        ],
-        fixedColumns: true
-      });
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: true,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0 },
+    { width: 100, targets: 1 },
+    { width: 300, targets: 2 }
+
+
+    ],
+    fixedColumns: true
   });
+
 }
 
-function table_inventario() {
-  $(document).ready(function() {
-    var dataTable = $("#tbinventory")
-      .removeAttr("width")
-      .DataTable({
-        ajax: {
-          url: "module/table_inventory.php",
-          type: "post",
-          data: {}
-        },
-        responsive: {
-          details: {
-            type: "column",
-            target: "tr"
-          }
-        },
+function table_inventario(moneda,iva) {
+ var dataTable = $('#tbinventory').removeAttr('width').DataTable( {
+  ajax: {
+    url: "module/table_inventory.php",
+    type:"post",
+    data:  {moneda:moneda,iva:iva}
+  },
+  responsive: {
+    details: {
+      type: "column",
+      target: "tr"
+    }
+    },
 
-        scrollY: false,
-        scrollX: false,
-        scrollCollapse: true,
-        paging: true,
-        columnDefs: [
-          { className: "control", orderable: false, targets: 0 },
-          { width: 100, targets: 1 },
-          { width: 300, targets: 2 }
-        ],
-        fixedColumns: true
-      });
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: true,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0 },
+    { width: 100, targets: 1 },
+    { width: 300, targets: 2 }
+    ],
+    fixedColumns: true
   });
-}
 
 function loadTopVendedores() {
   ////.log("h");
@@ -146,7 +142,7 @@ function loadTopClientes() {
     "ventas",
     "Top #" + data.top + " CLIENTES CON MAS COMPRAS EN " + data.moneda,
     true
-  );
+    );
 }
 
 function loadTopProductos() {
@@ -173,7 +169,7 @@ function loadTopProductos() {
     "VENDIDOS",
     "Top #" + data.top + " PRODUCTOS MAS VENDIDOS",
     true
-  );
+    );
 }
 
 function getRandomColor() {
@@ -194,7 +190,7 @@ function buildGraphBar(
   nameV,
   titulo,
   horizontal
-) {
+  ) {
   var myChart;
   if (urlAjax && idContainer && dataAjax && nameT && nameV) {
     $("#" + idContainer).html(
@@ -220,12 +216,12 @@ function buildGraphBar(
             data: {
               labels: labels,
               datasets: [
-                {
-                  label: titulo,
-                  data: vals,
-                  backgroundColor: colors,
-                  borderWidth: 1
-                }
+              {
+                label: titulo,
+                data: vals,
+                backgroundColor: colors,
+                borderWidth: 1
+              }
               ]
             },
             options: {
@@ -275,11 +271,11 @@ function buildGraphBar(
                   }
                 ],
                 yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true
-                    }
+                {
+                  ticks: {
+                    beginAtZero: true
                   }
+                }
                 ]
               }
             }

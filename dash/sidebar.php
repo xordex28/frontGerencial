@@ -31,12 +31,12 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">CUENTAS X COBRAR</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.php">Listado</a></li>
+                                <li><a onclick="page('page/list_cxc.php')">Listado </a></li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">PROVEEDORES</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.php">Listado</a></li>
+                                <li><a onclick="page('page/list_cxc.php')">Listado</a></li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">CUENTAS X PAGAR</span></a>

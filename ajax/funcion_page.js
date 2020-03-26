@@ -2,18 +2,20 @@ function page(url) {
   $.ajax({
     type: "POST",
     url: url,
-    success: function (response) {
+    success: function(response) {
       $("#div-results").html(response);
       $.ajax({
         type: "POST",
-        data: { page: url},
+        data: { page: url },
         url: "arch/session.php",
-        success: function (response) {
-          console.log(response);
+        success: function(response) {
+          ////.log(response);
         }
       });
       if (url == "page/inicio.php") {
         loadTopProductos();
+        loadTopClientes();
+        loadTopVendedores();
       }
     }
   });
@@ -23,7 +25,7 @@ function reload() {
   $.ajax({
     type: "POST",
     url: "arch/session.php",
-    success: function (response) {
+    success: function(response) {
       page(response);
     }
   });
@@ -70,6 +72,36 @@ function table_inventario(moneda,iva) {
       type: "column",
       target: "tr"
     }
+  },
+
+  scrollY:        false,
+  scrollX:        false,
+  scrollCollapse: true,
+  paging:         true,
+  columnDefs: [
+  { className: 'control',
+  orderable: false, targets: 0 },
+  { width: 100, targets: 1 },
+  { width: 300, targets: 2 }
+  ],
+  fixedColumns: true
+});
+}
+
+function table_cxc(moneda,fechaD,fechaH) {
+ // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
+
+ var dataTable = $('#tbcxc').removeAttr('width').DataTable( {
+  ajax: {
+    url: "module/table_cxc.php",
+    type:"post",
+    data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH}
+  },
+  responsive: {
+    details: {
+      type: "column",
+      target: "tr"
+    }
     },
 
     scrollY:        false,
@@ -84,11 +116,37 @@ function table_inventario(moneda,iva) {
     ],
     fixedColumns: true
   });
+}
 
+function loadTopVendedores() {
+  ////.log("h");
+  let codA = $("#cod_Almacen").val();
+  let fechaD = $("#fecDTopVendedor").val();
+  let fechaH = $("#fecHTopVendedor").val();
+  let topVendedor = $("#topVendedor").val();
+  let moneda = $("#monedaTopVendedor").val();
+  const data = {
+    moneda: moneda,
+    top: topVendedor,
+    fechaD: fechaD,
+    fechaH: fechaH,
+    cod_almacen: codA
+  };
+  ////.log(data);
+  buildGraphBar(
+    "topCV",
+    "views/topVendedores.php",
+    data,
+    "POST",
+    "nombrevendedor",
+    "ventas",
+    "Top #" + data.top + " VENDEDORES CON MAS VENTAS EN " + data.moneda,
+    true
+    );
 }
 
 function loadTopClientes() {
-  console.log("h");
+  ////.log("h");
   let codA = $("#cod_Almacen").val();
   let fechaD = $("#fecDTopCliente").val();
   let fechaH = $("#fecHTopCliente").val();
@@ -105,7 +163,7 @@ function loadTopClientes() {
     zona: zona,
     canal: canal
   };
-  console.log(data);
+  ////.log(data);
   buildGraphBar(
     "topCC",
     "views/topClientes.php",
@@ -113,22 +171,25 @@ function loadTopClientes() {
     "POST",
     "str_cliente_nombres",
     "ventas",
-    "Top #" + data.top + " Venta Cliente",
+    "Top #" + data.top + " CLIENTES CON MAS COMPRAS EN " + data.moneda,
     true
     );
 }
 
 function loadTopProductos() {
-  console.log("h");
   let codA = $("#cod_Almacen").val();
   let fechaD = $("#fecDTopProducto").val();
   let fechaH = $("#fecHTopProducto").val();
   let topProducto = $("#topProducto").val();
+  let lineaTopProducto = $("#lineaTopProducto").val();
+  let subLineaTopProducto = $("#subLineaTopProducto").val();
   const data = {
     top: topProducto,
     fechaD: fechaD,
     fechaH: fechaH,
-    cod_almacen: codA
+    cod_almacen: codA,
+    linea: lineaTopProducto,
+    subLinea: subLineaTopProducto
   };
   buildGraphBar(
     "topPC",
@@ -137,7 +198,7 @@ function loadTopProductos() {
     "POST",
     "descripcion",
     "VENDIDOS",
-    "Top #" + data.top + " Productos Vendidos",
+    "Top #" + data.top + " PRODUCTOS MAS VENDIDOS",
     true
     );
 }
@@ -163,18 +224,23 @@ function buildGraphBar(
   ) {
   var myChart;
   if (urlAjax && idContainer && dataAjax && nameT && nameV) {
+    $("#" + idContainer).html(
+      '<div class="lds-load " style="display:flex;justify-content: space-between;" ><div></div><div></div><div></div></div>'
+      );
     $.ajax({
       url: urlAjax,
       type: methodAjax,
       data: dataAjax,
       success: function(respuesta) {
-        console.log(respuesta);
+        //.log(respuesta);
+        $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
         const dataA = JSON.parse(respuesta);
         if (dataA["res"] && dataA["res"].length > 0) {
           const labels = dataA["res"].map(res => res[nameT]);
-          const vals = dataA["res"].map(res => Number(res[nameV]));
+          const vals = dataA["res"].map(res => {
+            return Number.parseFloat(res[nameV]);
+          });
           const colors = dataA["res"].map(() => getRandomColor());
-          $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
           var ctx = document.getElementById(`${idContainer}P`).getContext("2d");
           myChart = new Chart(ctx, {
             type: !horizontal ? "bar" : "horizontalBar",
@@ -190,10 +256,49 @@ function buildGraphBar(
               ]
             },
             options: {
+              tooltips: {
+                callbacks: {
+                  label: function(tooltipItem, data) {
+                    if (dataAjax.moneda) {
+                      if (parseInt(tooltipItem.xLabel) >= 1000) {
+                        return (
+                          dataAjax.moneda + " " +
+                          tooltipItem.xLabel
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                          );
+                      } else {
+                        return dataAjax.moneda + tooltipItem.xLabel;
+                      }
+                    } else {
+                      return tooltipItem.xLabel;
+                    }
+                  }
+                }
+              },
               scales: {
                 xAxes: [
                 {
-                  display: horizontal
+                  display: horizontal,
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                      if (dataAjax.moneda) {
+                        if (parseInt(value) >= 1000) {
+                          return (
+                            dataAjax.moneda +
+                            value
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                            );
+                        } else {
+                          return dataAjax.moneda + value;
+                        }
+                      } else {
+                        return value;
+                      }
+                    }
+                  }
                 }
                 ],
                 yAxes: [
@@ -206,12 +311,46 @@ function buildGraphBar(
               }
             }
           });
+        } else {
+          $("#" + idContainer).html(`<h5>${titulo} SIN DATA</h5>`);
         }
       },
       error: function() {
-        console.log("No se ha podido obtener la información");
+        $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
+        ////.log("No se ha podido obtener la información");
       }
     });
   }
   return myChart;
+}
+
+function getSubLinea(linea) {
+  ////.log(linea);
+  $.ajax({
+    type: "POST",
+    url: "views/getSubLinea.php",
+    data: { linea: linea },
+    success: function(response) {
+      ////.log(response);
+      const data = JSON.parse(response);
+      $("#subLineaTopProducto").html('<option value="">...</option>');
+      data.forEach(sub => {
+        $("#subLineaTopProducto").append(
+          `<option value= "${sub["codigo"]}">${sub["descripcion"]}</option>`
+          );
+      });
+    }
+  });
+}
+
+function testAjax(url,metodo,data){
+  $.ajax({
+    type: metodo,
+    url: url,
+    data: data,
+    success: function(response) {
+      console.log(response);
+      console.log(JSON.parse(response));
+    }
+  });
 }

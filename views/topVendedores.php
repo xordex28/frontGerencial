@@ -3,9 +3,8 @@
     $fD = $_POST['fechaD'];
     $fH = $_POST['fechaH'];
     $codAlmacen = $_POST['cod_almacen'];
-    $linea = $_POST['linea'];
-    $subLinea = $_POST['subLinea'];
+    $moneda = $_POST['moneda'];
     include('../arch/kpi.php');
-    $resp = topProductos($top,$fD,$fH,$codAlmacen,$linea,$subLinea);
+    $resp = topVendedores($top,$fD,$fH,$codAlmacen,$moneda);
     echo $resp;
 ?>

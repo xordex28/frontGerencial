@@ -22,14 +22,27 @@ include('../arch/kpi.php');
         <br>
         <div class="row">
             <!-- Column -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
+                            <div class="m-l-10 align-self-center">
+                                <h5 class="m-b-0 font-lgiht"><?php OnClientes($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="text-muted m-b-0">Clientes Activos</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-info"><i class="ti-wallet"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-light"> <?php OnClientes($_SESSION['target_almacen']); ?> </h3>
-                                <h5 class="text-muted m-b-0">Clientes Activos</h5>
+                                <h5 class="m-b-0 font-light"> On:<?php OnProductos($_SESSION['target_almacen']); ?> | Off:<?php OffProductos($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="text-muted m-b-0">Productos Activos | Inactivos</h5>
                             </div>
                         </div>
                     </div>
@@ -38,44 +51,22 @@ include('../arch/kpi.php');
 
             <!-- Column -->
             <!-- Column -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-row">
-                            <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
-                            <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht"><?php OnProductos($_SESSION['target_almacen']); ?></h3>
-                                <h5 class="text-muted m-b-0">Productos Activos</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Column -->
             <!-- Column -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-row">
-                            <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-cart-outline"></i></div>
-                            <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht"><?php OffProductos($_SESSION['target_almacen']); ?></h3>
-                                <h5 class="text-muted m-b-0">Productos Inactivos</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Column -->
             <!-- Column -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht"><?php SalesDayDls($_SESSION['target_almacen']); ?></h3>
-                                <h5 class="text-muted m-b-0">VENTAS DIARIAS ($)</h5>
+                                <h5 class="m-b-0 font-lgiht">
+                                    BsS: <?php SalesDayBs($_SESSION['target_almacen']); ?> | $: <?php SalesDayDls($_SESSION['target_almacen']); ?>
+                                </h5>
+                                <h5 class="text-muted m-b-0">
+                                    VENTAS DIARIAS (BsS / $)
+                                </h5>
                             </div>
                         </div>
                     </div>
@@ -83,29 +74,30 @@ include('../arch/kpi.php');
             </div>
             <!-- Column -->
             <!-- Column -->
-            <div class="col-lg-3 col-md-6">
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-6 col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht"><?php SalesDayBs($_SESSION['target_almacen']); ?></h3>
-                                <h5 class="text-muted m-b-0">VENTAS DIARIAS (BS)</h5>
+                                <h5 class="m-b-0 font-lgiht">BsS: <?php SalesMonthBs($_SESSION['target_almacen']); ?> | $: <?php SalesMonthDls($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="text-muted m-b-0">VENTAS MES (BsS / $)</h5>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Column -->
-            <!-- Column -->
-            <div class="col-lg-3 col-md-6">
+
+            <div class="col-lg-6 col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht"><?php SalesMonthDls($_SESSION['target_almacen']); ?></h3>
-                                <h5 class="text-muted m-b-0">VENTAS MES ($)</h5>
+                                <h5 class="m-b-0 font-lgiht">BsS: <?php documentsExpiredBs($_SESSION['target_almacen']); ?> | $: <?php documentsExpiredDls($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="text-muted m-b-0">DOCUMENTOS VENCIDOS (BsS / $)</h5>
                             </div>
                         </div>
                     </div>
@@ -113,19 +105,6 @@ include('../arch/kpi.php');
             </div>
             <!-- Column -->
             <!-- Column -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-row">
-                            <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
-                            <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht"><?php SalesMonthBs($_SESSION['target_almacen']); ?></h3>
-                                <h5 class="text-muted m-b-0">VENTAS MES (BS)</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Column -->
         </div>
         <div class="row">
@@ -193,7 +172,7 @@ include('../arch/kpi.php');
                     </div>
                 </div>
                 <div id="topPC" class="col-lg-10 col-md-10 row" style="display:flex;justify-content: space-between;">
-                   
+
                 </div>
             </div>
             <div class="col-lg-12 col-md-12 row" style=" margin:0px;padding:5px;  ">
@@ -318,7 +297,7 @@ include('../arch/kpi.php');
 
                 </div>
                 <div id="topCV" class="col-lg-10 col-md-10" style="display:flex;justify-content: space-between;">
-                   
+
                 </div>
             </div>
         </div>

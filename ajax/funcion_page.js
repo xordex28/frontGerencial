@@ -32,62 +32,89 @@ function reload() {
 }
 
 function table_cliente() {
-  $(document).ready(function() {
-    var dataTable = $("#tbcliente")
-      .removeAttr("width")
-      .DataTable({
-        ajax: {
-          url: "module/table_cliente.php"
-        },
-        responsive: {
-          details: {
-            type: "column",
-            target: "tr"
-          }
-        },
+  var dataTable = $('#tbcliente').removeAttr('width').DataTable( {
+    ajax: {
+      url: "module/table_cliente.php"
+    },
+    responsive: {
+      details: {
+        type: "column",
+        target: "tr"
+      }
+    },
 
-        scrollY: false,
-        scrollX: false,
-        scrollCollapse: true,
-        paging: true,
-        columnDefs: [
-          { className: "control", orderable: false, targets: 0 },
-          { width: 100, targets: 1 },
-          { width: 300, targets: 2 }
-        ],
-        fixedColumns: true
-      });
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: true,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0 },
+    { width: 100, targets: 1 },
+    { width: 300, targets: 2 }
+
+
+    ],
+    fixedColumns: true
   });
+
 }
 
-function table_inventario() {
-  $(document).ready(function() {
-    var dataTable = $("#tbinventory")
-      .removeAttr("width")
-      .DataTable({
-        ajax: {
-          url: "module/table_inventory.php",
-          type: "post",
-          data: {}
-        },
-        responsive: {
-          details: {
-            type: "column",
-            target: "tr"
-          }
-        },
+function table_inventario(moneda,iva) {
+ var dataTable = $('#tbinventory').removeAttr('width').DataTable( {
+  ajax: {
+    url: "module/table_inventory.php",
+    type:"post",
+    data:  {moneda:moneda,iva:iva}
+  },
+  responsive: {
+    details: {
+      type: "column",
+      target: "tr"
+    }
+  },
 
-        scrollY: false,
-        scrollX: false,
-        scrollCollapse: true,
-        paging: true,
-        columnDefs: [
-          { className: "control", orderable: false, targets: 0 },
-          { width: 100, targets: 1 },
-          { width: 300, targets: 2 }
-        ],
-        fixedColumns: true
-      });
+  scrollY:        false,
+  scrollX:        false,
+  scrollCollapse: true,
+  paging:         true,
+  columnDefs: [
+  { className: 'control',
+  orderable: false, targets: 0 },
+  { width: 100, targets: 1 },
+  { width: 300, targets: 2 }
+  ],
+  fixedColumns: true
+});
+}
+
+function table_cxc(moneda,fechaD,fechaH) {
+ // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
+
+ var dataTable = $('#tbcxc').removeAttr('width').DataTable( {
+  ajax: {
+    url: "module/table_cxc.php",
+    type:"post",
+    data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH}
+  },
+  responsive: {
+    details: {
+      type: "column",
+      target: "tr"
+    }
+    },
+
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: true,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0 },
+    { width: 100, targets: 1 },
+    { width: 300, targets: 2 }
+    ],
+    fixedColumns: true
   });
 }
 
@@ -115,7 +142,7 @@ function loadTopVendedores() {
     "ventas",
     "Top #" + data.top + " VENDEDORES CON MAS VENTAS EN " + data.moneda,
     true
-  );
+    );
 }
 
 function loadTopClientes() {
@@ -146,7 +173,7 @@ function loadTopClientes() {
     "ventas",
     "Top #" + data.top + " CLIENTES CON MAS COMPRAS EN " + data.moneda,
     true
-  );
+    );
 }
 
 function loadTopProductos() {
@@ -173,7 +200,7 @@ function loadTopProductos() {
     "VENDIDOS",
     "Top #" + data.top + " PRODUCTOS MAS VENDIDOS",
     true
-  );
+    );
 }
 
 function getRandomColor() {
@@ -194,12 +221,12 @@ function buildGraphBar(
   nameV,
   titulo,
   horizontal
-) {
+  ) {
   var myChart;
   if (urlAjax && idContainer && dataAjax && nameT && nameV) {
     $("#" + idContainer).html(
       '<div class="lds-load " style="display:flex;justify-content: space-between;" ><div></div><div></div><div></div></div>'
-    );
+      );
     $.ajax({
       url: urlAjax,
       type: methodAjax,
@@ -220,12 +247,12 @@ function buildGraphBar(
             data: {
               labels: labels,
               datasets: [
-                {
-                  label: titulo,
-                  data: vals,
-                  backgroundColor: colors,
-                  borderWidth: 1
-                }
+              {
+                label: titulo,
+                data: vals,
+                backgroundColor: colors,
+                borderWidth: 1
+              }
               ]
             },
             options: {
@@ -237,9 +264,9 @@ function buildGraphBar(
                         return (
                           dataAjax.moneda + " " +
                           tooltipItem.xLabel
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                        );
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                          );
                       } else {
                         return dataAjax.moneda + tooltipItem.xLabel;
                       }
@@ -251,35 +278,35 @@ function buildGraphBar(
               },
               scales: {
                 xAxes: [
-                  {
-                    display: horizontal,
-                    ticks: {
-                      beginAtZero: true,
-                      callback: function(value, index, values) {
-                        if (dataAjax.moneda) {
-                          if (parseInt(value) >= 1000) {
-                            return (
-                              dataAjax.moneda +
-                              value
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                {
+                  display: horizontal,
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                      if (dataAjax.moneda) {
+                        if (parseInt(value) >= 1000) {
+                          return (
+                            dataAjax.moneda +
+                            value
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                             );
-                          } else {
-                            return dataAjax.moneda + value;
-                          }
                         } else {
-                          return value;
+                          return dataAjax.moneda + value;
                         }
+                      } else {
+                        return value;
                       }
                     }
                   }
+                }
                 ],
                 yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true
-                    }
+                {
+                  ticks: {
+                    beginAtZero: true
                   }
+                }
                 ]
               }
             }
@@ -310,8 +337,20 @@ function getSubLinea(linea) {
       data.forEach(sub => {
         $("#subLineaTopProducto").append(
           `<option value= "${sub["codigo"]}">${sub["descripcion"]}</option>`
-        );
+          );
       });
+    }
+  });
+}
+
+function testAjax(url,metodo,data){
+  $.ajax({
+    type: metodo,
+    url: url,
+    data: data,
+    success: function(response) {
+      console.log(response);
+      console.log(JSON.parse(response));
     }
   });
 }

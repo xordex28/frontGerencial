@@ -157,7 +157,7 @@ function loadTopVendedores() {
     cod_almacen: codA
   };
   ////.log(data);
-  buildGraphBar(
+  buildGraphPie(
     "topCV",
     "views/topVendedores.php",
     data,
@@ -282,21 +282,16 @@ function buildGraphBar(
             options: {
               tooltips: {
                 callbacks: {
-                  label: function(tooltipItem, data) {
-                    if (dataAjax.moneda) {
-                      if (parseInt(tooltipItem.xLabel) >= 1000) {
-                        return (
-                          dataAjax.moneda + " " +
-                          tooltipItem.xLabel
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                          );
-                      } else {
-                        return dataAjax.moneda + tooltipItem.xLabel;
-                      }
-                    } else {
-                      return tooltipItem.xLabel;
-                    }
+                  label: function(tooltipItem, data,i) {
+                    console.log(data,tooltipItem)
+                    const index = tooltipItem['index'];
+                    const indexD = tooltipItem['datasetIndex'];
+                    const formatedValueS = data['datasets'][indexD]['data'][index].toString().split('.');
+                    const entera = formatedValueS[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    const decimal = (formatedValueS[1])?formatedValueS[1].substring(0,1):0;
+                    // .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    const labelL = `${data['labels'][index]} ${dataAjax.moneda?dataAjax.moneda:''}:${entera}.${decimal}`
+                    return labelL
                   }
                 }
               },
@@ -307,6 +302,7 @@ function buildGraphBar(
                   ticks: {
                     beginAtZero: true,
                     callback: function(value, index, values) {
+                      console.log(value,index,values)
                       if (dataAjax.moneda) {
                         if (parseInt(value) >= 1000) {
                           return (
@@ -332,6 +328,80 @@ function buildGraphBar(
                   }
                 }
                 ]
+              }
+            }
+          });
+        } else {
+          $("#" + idContainer).html(`<h5>${titulo} SIN DATA</h5>`);
+        }
+      },
+      error: function() {
+        $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
+        ////.log("No se ha podido obtener la información");
+      }
+    });
+  }
+  return myChart;
+}
+
+function buildGraphPie(
+  idContainer,
+  urlAjax,
+  dataAjax,
+  methodAjax,
+  nameT,
+  nameV,
+  titulo,
+  horizontal
+  ) {
+  var myChart;
+  if (urlAjax && idContainer && dataAjax && nameT && nameV) {
+    $("#" + idContainer).html(
+      '<div class="lds-load " style="display:flex;justify-content: space-between;" ><div></div><div></div><div></div></div>'
+      );
+    $.ajax({
+      url: urlAjax,
+      type: methodAjax,
+      data: dataAjax,
+      success: function(respuesta) {
+        //.log(respuesta);
+        $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
+        const dataA = JSON.parse(respuesta);
+        if (dataA["res"] && dataA["res"].length > 0) {
+          const labels = dataA["res"].map(res => res[nameT]);
+          const vals = dataA["res"].map(res => {
+            return Number.parseFloat(res[nameV]);
+          });
+          const colors = dataA["res"].map(() => getRandomColor());
+          var ctx = document.getElementById(`${idContainer}P`).getContext("2d");
+          myChart = new Chart(ctx, {
+            type: !horizontal ? "pie" : "doughnut",
+            data: {
+              labels: labels,
+              datasets: [
+              {
+                label: titulo,
+                data: vals,
+                backgroundColor: colors,
+                borderWidth: 1
+              }
+              ]
+            },
+            options: {
+              tooltips: {
+                callbacks: {
+                  label: function(tooltipItem, data,i) {
+                    
+                    const index = tooltipItem['index'];
+                    const indexD = tooltipItem['datasetIndex'];
+                    const formatedValueS = data['datasets'][indexD]['data'][index].toString().split('.');
+                    const entera = formatedValueS[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    const decimal = (formatedValueS[1])?formatedValueS[1].substring(0,1):0;
+                    // .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    const labelL = `${data['labels'][index]} ${dataAjax.moneda?dataAjax.moneda:''}:${entera}.${decimal}`
+                    return labelL
+                  }
+                }
               }
             }
           });

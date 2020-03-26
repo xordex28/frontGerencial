@@ -9,7 +9,7 @@
   <br>
   <h4>Clientes</h4>
 <div style="max-width: 80vw;overflow: auto;">
-<table id="tbcliente" class="display compact" cellspacing="0" >
+<table id="tbcliente" class="display responsive nowrap" cellspacing="0" >
         <thead>
             <tr>
                 <th></th>
@@ -30,7 +30,7 @@
             </tr>
         </thead>
     </table>
-    <div>
+
 <script>
   
 
@@ -40,5 +40,7 @@
    });
     </script>
 
+
+</div>  
 </div>  
 </div>  

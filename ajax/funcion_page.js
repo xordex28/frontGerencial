@@ -36,22 +36,14 @@ function table_cliente() {
     ajax: {
       url: "module/table_cliente.php"
     },
-    responsive: {
-      details: {
-        type: "column",
-        target: "tr"
-      }
-    },
 
     scrollY:        false,
     scrollX:        false,
-    scrollCollapse: true,
+    scrollCollapse: false,
     paging:         true,
     columnDefs: [
     { className: 'control',
-    orderable: false, targets: 0 },
-    { width: 100, targets: 1 },
-    { width: 300, targets: 2 }
+    orderable: false, targets: 0 }
 
 
     ],
@@ -67,25 +59,18 @@ function table_inventario(moneda,iva) {
     type:"post",
     data:  {moneda:moneda,iva:iva}
   },
-  responsive: {
-    details: {
-      type: "column",
-      target: "tr"
-    }
-  },
+  
 
-  scrollY:        false,
-  scrollX:        false,
-  scrollCollapse: true,
-  paging:         true,
-  columnDefs: [
-  { className: 'control',
-  orderable: false, targets: 0 },
-  { width: 100, targets: 1 },
-  { width: 300, targets: 2 }
-  ],
-  fixedColumns: true
-});
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: false,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0 }
+    ],
+    fixedColumns: true
+  });
 }
 
 function table_cxc(moneda,fechaD,fechaH) {
@@ -97,25 +82,64 @@ function table_cxc(moneda,fechaD,fechaH) {
     type:"post",
     data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH}
   },
-  responsive: {
-    details: {
-      type: "column",
-      target: "tr"
-    }
+
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: false,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0}
+    ],
+    fixedColumns: true
+  });
+}
+
+function table_cxp(moneda,fechaD,fechaH) {
+ // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
+
+ var dataTable = $('#tbcxp').removeAttr('width').DataTable( {
+  ajax: {
+    url: "module/table_cxp.php",
+    type:"post",
+    data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH}
+  },
+
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: false,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0}
+    ],
+    fixedColumns: true
+  });
+}
+
+function table_proveedores() {
+  var dataTable = $('#tbproveedores').removeAttr('width').DataTable( {
+    ajax: {
+      url: "module/table_proveedores.php"
+    },
+    responsive: {
+      details: {
+        type: "column",
+        target: "tr"
+      }
     },
 
     scrollY:        false,
     scrollX:        false,
-    scrollCollapse: true,
+    scrollCollapse: false,
     paging:         true,
     columnDefs: [
     { className: 'control',
-    orderable: false, targets: 0 },
-    { width: 100, targets: 1 },
-    { width: 300, targets: 2 }
+    orderable: false, targets: 0 }
     ],
     fixedColumns: true
   });
+
 }
 
 function loadTopVendedores() {

@@ -21,9 +21,9 @@ function OnClientes($almacen){
     $data = array(
   'target_almacen' => $almacen
   
-);
+    );
 
-curl_setopt_array($curlHandler, [
+    curl_setopt_array($curlHandler, [
   CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/onclientes',
   CURLOPT_RETURNTRANSFER => true,
   CURLINFO_HEADER_OUT => true,
@@ -31,15 +31,42 @@ curl_setopt_array($curlHandler, [
   CURLOPT_POST => true,
 
   CURLOPT_POSTFIELDS => $data,
-]);
+    ]);
 
-$response = curl_exec($curlHandler);
+    $response = curl_exec($curlHandler);
 
-curl_close($curlHandler);
+    curl_close($curlHandler);
 
-$obj = json_decode($response);
+    $obj = json_decode($response);
 
-echo $obj->{'Clientes'};
+    echo $obj->{'Clientes'};
+
+}
+
+function OffClientes($almacen){
+    $curlHandler = curl_init();
+    $data = array(
+  'target_almacen' => $almacen
+  
+    );
+
+    curl_setopt_array($curlHandler, [
+  CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/offclientes',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLINFO_HEADER_OUT => true,
+
+  CURLOPT_POST => true,
+
+  CURLOPT_POSTFIELDS => $data,
+    ]);
+
+    $response = curl_exec($curlHandler);
+
+    curl_close($curlHandler);
+
+    $obj = json_decode($response);
+
+    echo $obj->{'Clientes'};
 
 }
 

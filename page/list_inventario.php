@@ -6,8 +6,8 @@ include('../arch/datatables.php');
 <div class="page-wrapper">
     <div class="container-fluid">
       <br>
-      <h4>Clientes</h4>
-      <div style="max-width: 80vw;overflow: auto;">
+      <h4>Ineventario</h4>
+      
          <div class="form-group" >
             <span>
              <label for="exampleFormControlSelect1">Moneda: </label>
@@ -24,7 +24,8 @@ include('../arch/datatables.php');
           </select>
       </span>
   </div>
-  <table id="tbinventory" class="display compact" cellspacing="0" >
+  <div style="max-width: 80vw;overflow: auto;">
+  <table id="tbinventory" class="display responsive nowrap" cellspacing="0" >
     <thead>
         <tr>
             <th></th>
@@ -40,7 +41,7 @@ include('../arch/datatables.php');
         </tr>
     </thead>
 </table>
-<div>
+
     <script>
 
 
@@ -59,6 +60,7 @@ include('../arch/datatables.php');
             table_inventario(moneda,iva);
          }
     </script>
-
+ 
+</div>  
 </div>  
 </div>  

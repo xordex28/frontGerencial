@@ -8,7 +8,7 @@ include('../arch/kpi.php');
 <div class="page-wrapper">
   <div class="container-fluid">
     <br>
-    <h4>Cuentas Por Cobrar</h4>
+    <h4>Cuentas Por Pagar</h4>
     <div class="form-group" >
       <span>
        <label for="exampleFormControlSelect1">Fecha: </label>
@@ -25,22 +25,22 @@ include('../arch/kpi.php');
       <option value="1">Usd</option>
     </select>
   </span>
-<!--   <span style="margin-left:20px;">
+  <span style="margin-left:20px;">
 
    <button type="button" onclick="change()" class="btn btn-primary btn-ms" name="change" id="change" >Listar</button> 
- </span> -->
+ </span>
 </div>
 <div style="max-width: 100vw;overflow: auto;">
-<table id="tbcxc" class="display responsive nowrap" cellspacing="0" >
+<table id="tbcxp" class="display responsive nowrap" cellspacing="0" >
   <thead>
     <tr>
       <th></th>
-      <th>nombres</th>
+      <th>nombreproveedor</th>
       <th>nombre</th>
-      <th>iddoc</th>
-      <th>fechaemision</th>
-      <th>fechavencimiento.</th>
-      <th>montooriginal</th>
+      <th>docasoc</th>
+      <th>fechadoc</th>
+      <th>fechapago.</th>
+      <th>total</th>
       <th>montoabonado</th>
       <th>saldoactual</th>
 
@@ -56,8 +56,8 @@ include('../arch/kpi.php');
     var fechaH = String($('#fechaH').val()).replace(/-/g,'');
     //console.log(moneda, fechaD, fechaH);
 
-    $('#tbcxc').DataTable().destroy();
-    table_cxc(moneda,fechaD,fechaH);
+    $('#tbcxp').DataTable().destroy();
+    table_cxp(moneda,fechaD,fechaH);
 
   });
 
@@ -65,8 +65,8 @@ include('../arch/kpi.php');
    var moneda = $('#moneda').val();
     var fechaD = String($('#fechaD').val()).replace(/-/g,'');
     var fechaH = String($('#fechaH').val()).replace(/-/g,'');
-   $('#tbcxc').DataTable().destroy();
-   table_cxc(moneda,fechaD,fechaH);
+   $('#tbcxp').DataTable().destroy();
+   table_cxp(moneda,fechaD,fechaH);
  }
 </script>
 

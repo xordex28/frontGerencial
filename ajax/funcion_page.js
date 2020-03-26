@@ -72,6 +72,45 @@ function table_inventario(moneda,iva) {
       type: "column",
       target: "tr"
     }
+  },
+
+  scrollY:        false,
+  scrollX:        false,
+  scrollCollapse: true,
+  paging:         true,
+  columnDefs: [
+  { className: 'control',
+  orderable: false, targets: 0 },
+  { width: 100, targets: 1 },
+  { width: 300, targets: 2 }
+  ],
+  fixedColumns: true
+});
+}
+
+function table_cxc(moneda,fechaD,fechaH) {
+    $.ajax({
+    type: "POST",
+    url: "module/table_cxc.php",
+    data: { moneda:moneda,fechaD:fechaD, fechaH:fechaH},
+    success: function(response) {
+      console.log(response);
+
+    }
+  });
+ 
+
+ /*var dataTable = $('#tbcxc').removeAttr('width').DataTable( {
+  ajax: {
+    url: "module/table_cxc.php",
+    type:"post",
+    data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH}
+  },
+  responsive: {
+    details: {
+      type: "column",
+      target: "tr"
+    }
     },
 
     scrollY:        false,
@@ -85,7 +124,8 @@ function table_inventario(moneda,iva) {
     { width: 300, targets: 2 }
     ],
     fixedColumns: true
-  });
+  });*/
+}
 
 function loadTopVendedores() {
   ////.log("h");
@@ -111,7 +151,7 @@ function loadTopVendedores() {
     "ventas",
     "Top #" + data.top + " VENDEDORES CON MAS VENTAS EN " + data.moneda,
     true
-  );
+    );
 }
 
 function loadTopClientes() {
@@ -195,7 +235,7 @@ function buildGraphBar(
   if (urlAjax && idContainer && dataAjax && nameT && nameV) {
     $("#" + idContainer).html(
       '<div class="lds-load " style="display:flex;justify-content: space-between;" ><div></div><div></div><div></div></div>'
-    );
+      );
     $.ajax({
       url: urlAjax,
       type: methodAjax,
@@ -233,9 +273,9 @@ function buildGraphBar(
                         return (
                           dataAjax.moneda + " " +
                           tooltipItem.xLabel
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                        );
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                          );
                       } else {
                         return dataAjax.moneda + tooltipItem.xLabel;
                       }
@@ -247,28 +287,28 @@ function buildGraphBar(
               },
               scales: {
                 xAxes: [
-                  {
-                    display: horizontal,
-                    ticks: {
-                      beginAtZero: true,
-                      callback: function(value, index, values) {
-                        if (dataAjax.moneda) {
-                          if (parseInt(value) >= 1000) {
-                            return (
-                              dataAjax.moneda +
-                              value
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                {
+                  display: horizontal,
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                      if (dataAjax.moneda) {
+                        if (parseInt(value) >= 1000) {
+                          return (
+                            dataAjax.moneda +
+                            value
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                             );
-                          } else {
-                            return dataAjax.moneda + value;
-                          }
                         } else {
-                          return value;
+                          return dataAjax.moneda + value;
                         }
+                      } else {
+                        return value;
                       }
                     }
                   }
+                }
                 ],
                 yAxes: [
                 {
@@ -306,7 +346,7 @@ function getSubLinea(linea) {
       data.forEach(sub => {
         $("#subLineaTopProducto").append(
           `<option value= "${sub["codigo"]}">${sub["descripcion"]}</option>`
-        );
+          );
       });
     }
   });

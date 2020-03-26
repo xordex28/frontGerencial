@@ -154,14 +154,14 @@ curl_close($curlHandler);
  foreach ($obj as $key => $value){
   $subdata=array();
   $subdata[] = '';
-   $subdata[] = $value->{'Codigo'};
-   $subdata[] = $value->{'Item'};
-   $subdata[] = $value->{'presentacion'};
-   $subdata[] = $value->{'Precio_A'};
-   $subdata[] = $value->{'Precio_B'};
-   $subdata[] = $value->{'Precio_C'};
-   $subdata[] = $value->{'Precio_D'};
-   $subdata[] = $value->{'existencia'};
+   $subdata[] = $value->{'nombres'};
+   $subdata[] = $value->{'nombre'};
+   $subdata[] = $value->{'iddoc'};
+   $subdata[] = $value->{'fechaemision'};
+   $subdata[] = $value->{'fechavencimiento'};
+   $subdata[] = $value->{'montooriginal'};
+   $subdata[] = $value->{'montoabonado'};
+   $subdata[] = $value->{'saldoactual'};
 
   
   $datas[]=$subdata;

@@ -28,8 +28,8 @@ include('../arch/kpi.php');
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h5 class="m-b-0 font-lgiht"><?php OnClientes($_SESSION['target_almacen']); ?></h5>
-                                <h5 class="text-muted m-b-0">Clientes Activos</h5>
+                                <h5 class="m-b-0 font-lgiht">On: <?php OnClientes($_SESSION['target_almacen']); ?> | Off: <?php OffClientes($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="text-muted m-b-0">Clientes Activos | Inactivos</h5>
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,9 @@ include('../arch/kpi.php');
                                 <option value="50">#50</option>
                             </select>
                         </span>
-                        <button class="btn btn-outline-dark col-lg-3 col-md-3 form-control" type="button" onclick="loadTopProductos()">Actualizar</button>
+                        <span class="col-lg-3 col-md-3">
+                            <button class="btn btn-primary btn-md" type="button" onclick="loadTopProductos()">Actualizar</button>
+                        </span>
                     </div>
                     <div style="display:flex;justify-content: space-between;">
                         <span class="col-lg-3 col-md-3">
@@ -196,7 +198,9 @@ include('../arch/kpi.php');
                                 <option value="50">#50</option>
                             </select>
                         </span>
-                        <button class="btn btn-outline-dark col-lg-3 col-md-3 form-control" type="button" onclick="loadTopClientes()">Actualizar</button>
+                        <span class="col-lg-3 col-md-3">
+                            <button class="btn btn-primary btn-md" type="button" onclick="loadTopClientes()">Actualizar</button>
+                        </span>
                     </div>
                     <div style="display:flex;justify-content: space-between;">
                         <span class="col-lg-3 col-md-3">
@@ -277,7 +281,9 @@ include('../arch/kpi.php');
                                 <option value="50">#50</option>
                             </select>
                         </span>
-                        <button class="btn btn-outline-dark col-lg-3 col-md-3 form-control" type="button" onclick="loadTopVendedores()">Actualizar</button>
+                        <span class="col-lg-3 col-md-3">
+                            <button class="btn btn-primary btn-md" type="button" onclick="loadTopVendedores()">Actualizar</button>
+                        </span>
                     </div>
                     <div style="display:flex;justify-content: space-between;">
                         <span class="col-lg-3 col-md-3">

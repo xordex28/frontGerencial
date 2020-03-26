@@ -154,14 +154,14 @@ curl_close($curlHandler);
  foreach ($obj as $key => $value){
   $subdata=array();
   $subdata[] = '';
-   $subdata[] = $value->{'nombres'};
-   $subdata[] = $value->{'nombre'};
-   $subdata[] = $value->{'iddoc'};
-   $subdata[] = $value->{'fechaemision'};
-   $subdata[] = $value->{'fechavencimiento'};
-   $subdata[] = $value->{'montooriginal'};
-   $subdata[] = $value->{'montoabonado'};
-   $subdata[] = $value->{'saldoactual'};
+   $subdata[] = isset($value->{'nombres'})?$value->{'nombres'}:'';
+   $subdata[] = isset($value->{'nombre'})?$value->{'nombre'}:'';
+   $subdata[] = isset($value->{'iddoc'})?$value->{'iddoc'}:'';
+   $subdata[] = isset($value->{'fechaemision'})?$value->{'fechaemision'}->{'date'}:null;
+   $subdata[] = isset($value->{'fechavencimiento'})?$value->{'fechavencimiento'}->{'date'}:null;
+   $subdata[] = isset($value->{'montooriginal'})?number_format($value->{'montooriginal'},2,',','.'):'0';
+   $subdata[] = isset($value->{'montoabonado'})?number_format($value->{'montoabonado'},2,',','.'):'0';
+   $subdata[] = isset($value->{'saldoactual'})?number_format($value->{'saldoactual'},2,',','.'):'0';
 
   
   $datas[]=$subdata;

@@ -89,18 +89,9 @@ function table_inventario(moneda,iva) {
 }
 
 function table_cxc(moneda,fechaD,fechaH) {
-    $.ajax({
-    type: "POST",
-    url: "module/table_cxc.php",
-    data: { moneda:moneda,fechaD:fechaD, fechaH:fechaH},
-    success: function(response) {
-      console.log(response);
+ // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
 
-    }
-  });
- 
-
- /*var dataTable = $('#tbcxc').removeAttr('width').DataTable( {
+ var dataTable = $('#tbcxc').removeAttr('width').DataTable( {
   ajax: {
     url: "module/table_cxc.php",
     type:"post",
@@ -124,7 +115,7 @@ function table_cxc(moneda,fechaD,fechaH) {
     { width: 300, targets: 2 }
     ],
     fixedColumns: true
-  });*/
+  });
 }
 
 function loadTopVendedores() {
@@ -348,6 +339,18 @@ function getSubLinea(linea) {
           `<option value= "${sub["codigo"]}">${sub["descripcion"]}</option>`
           );
       });
+    }
+  });
+}
+
+function testAjax(url,metodo,data){
+  $.ajax({
+    type: metodo,
+    url: url,
+    data: data,
+    success: function(response) {
+      console.log(response);
+      console.log(JSON.parse(response));
     }
   });
 }

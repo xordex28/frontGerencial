@@ -14,13 +14,13 @@ WHERE fechaemision BETWEEN '$fechaD' AND '$fechaH'
 AND codalmacen = '".$_SESSION['target_almacen']."'";
 }
 if($moneda==1){
-  $sql = "SELECT nombres,nombre,iddoc,fechaemision,fechavencimiento,montooriginal/TASA AS MONTOORIGINAL,
-montoabonado/TASA AS MONTOABONADO, saldoactual/TASA AS SALDOACTUAL 
+  $sql = "SELECT nombres,nombre,iddoc,fechaemision,fechavencimiento,montooriginal/TASA AS montooriginal,
+montoabonado/TASA AS montoabonado, saldoactual/TASA AS saldoactual 
 FROM View_ctasxcobrar
 WHERE fechaemision BETWEEN '$fechaD' AND '$fechaH' 
 AND codalmacen = '".$_SESSION['target_almacen']."'";
 }
-echo $sql;
-//echo GetCxc($sql);
+//echo $sql;
+echo GetCxc($sql);
 
 ?>

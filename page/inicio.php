@@ -2,23 +2,7 @@
 session_start();
 include('../arch/kpi.php');
 ?>
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            </div>
-        </div>
-    </div>
-</div>
-<div class="page-wrapper">
-    <div class="container-fluid">
+
         <br>
         <div class="row">
             <!-- Column -->
@@ -28,7 +12,7 @@ include('../arch/kpi.php');
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h5 class="m-b-0 font-lgiht">On: <?php OnClientes($_SESSION['target_almacen']); ?> | Off: <?php OffClientes($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="m-b-0 font-light">Activos: <?php OnClientes($_SESSION['target_almacen']); ?> | Inactivos: <?php OffClientes($_SESSION['target_almacen']); ?></h5>
                                 <h5 class="text-muted m-b-0">Clientes Activos | Inactivos</h5>
                             </div>
                         </div>
@@ -41,7 +25,7 @@ include('../arch/kpi.php');
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-info"><i class="ti-wallet"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h5 class="m-b-0 font-light"> On:<?php OnProductos($_SESSION['target_almacen']); ?> | Off:<?php OffProductos($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="m-b-0 font-light"> Activos:<?php OnProductos($_SESSION['target_almacen']); ?> | Inactivos:<?php OffProductos($_SESSION['target_almacen']); ?></h5>
                                 <h5 class="text-muted m-b-0">Productos Activos | Inactivos</h5>
                             </div>
                         </div>
@@ -61,7 +45,7 @@ include('../arch/kpi.php');
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h5 class="m-b-0 font-lgiht">
+                                <h5 class="m-b-0 font-light">
                                     BsS: <?php SalesDayBs($_SESSION['target_almacen']); ?> | $: <?php SalesDayDls($_SESSION['target_almacen']); ?>
                                 </h5>
                                 <h5 class="text-muted m-b-0">
@@ -82,7 +66,7 @@ include('../arch/kpi.php');
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h5 class="m-b-0 font-lgiht">BsS: <?php SalesMonthBs($_SESSION['target_almacen']); ?> | $: <?php SalesMonthDls($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="m-b-0 font-light">BsS: <?php SalesMonthBs($_SESSION['target_almacen']); ?> | $: <?php SalesMonthDls($_SESSION['target_almacen']); ?></h5>
                                 <h5 class="text-muted m-b-0">VENTAS MES (BsS / $)</h5>
                             </div>
                         </div>
@@ -96,7 +80,7 @@ include('../arch/kpi.php');
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
                             <div class="m-l-10 align-self-center">
-                                <h5 class="m-b-0 font-lgiht">BsS: <?php documentsExpiredBs($_SESSION['target_almacen']); ?> | $: <?php documentsExpiredDls($_SESSION['target_almacen']); ?></h5>
+                                <h5 class="m-b-0 font-light">BsS: <?php documentsExpiredBs($_SESSION['target_almacen']); ?> | $: <?php documentsExpiredDls($_SESSION['target_almacen']); ?></h5>
                                 <h5 class="text-muted m-b-0">DOCUMENTOS VENCIDOS (BsS / $)</h5>
                             </div>
                         </div>
@@ -304,13 +288,9 @@ include('../arch/kpi.php');
                 </div>
             </div>
         </div>
-        <input type="hidden" id="cod_Almacen" value="<?php echo $_SESSION['target_almacen']; ?>">
+         <input type="hidden" id="cod_Almacen" value="<?php echo $_SESSION['target_almacen']; ?>">
 
-    </div>
-</div>
 
-<script>
-</script>
 
 <style>
     .lds-load {

@@ -5,8 +5,7 @@ include('../arch/datatables.php');
 include('../arch/kpi.php');
 
 ?>   
-<div class="page-wrapper">
-  <div class="container-fluid">
+
     <br>
     <h4>Cuentas Por Pagar</h4>
     <div class="form-group" >
@@ -25,24 +24,25 @@ include('../arch/kpi.php');
       <option value="1">Usd</option>
     </select>
   </span>
-  <span style="margin-left:20px;">
+ <!-- <span style="margin-left:20px;">
 
    <button type="button" onclick="change()" class="btn btn-primary btn-ms" name="change" id="change" >Listar</button> 
  </span>
+ -->
 </div>
 <div style="max-width: 100vw;overflow: auto;">
 <table id="tbcxp" class="display responsive nowrap" cellspacing="0" >
   <thead>
     <tr>
       <th></th>
-      <th>nombreproveedor</th>
-      <th>nombre</th>
-      <th>docasoc</th>
-      <th>fechadoc</th>
-      <th>fechapago.</th>
-      <th>total</th>
-      <th>montoabonado</th>
-      <th>saldoactual</th>
+      <th>Nombreproveedor</th>
+      <th>Nombre</th>
+      <th>Docasoc</th>
+      <th>Fechadoc</th>
+      <th>Fechapago.</th>
+      <th>Total</th>
+      <th>Montoabonado</th>
+      <th>Saldoactual</th>
 
     </tr>
   </thead>
@@ -72,5 +72,4 @@ include('../arch/kpi.php');
 
 
 </div>  
-</div> 
-</div> 
+

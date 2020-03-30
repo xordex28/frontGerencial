@@ -4,8 +4,7 @@
  session_start(); 
  include('../arch/datatables.php');
  ?>   
-<div class="page-wrapper">
-<div class="container-fluid">
+
   <br>
   <h4>Clientes</h4>
 <div style="max-width: 80vw;overflow: auto;">
@@ -15,18 +14,18 @@
                 <th></th>
                 <th>Cedula</th>
                 <th>Nombre</th>
-                <th>tlf1</th>
-                <th>tlf2.</th>
-                <th>estado</th>
-                <th>ciudad</th>
-                <th>municipio</th>
+                <th>Tlf1</th>
+                <th>Tlf2.</th>
+                <th>Estado</th>
+                <th>Ciudad</th>
+                <th>Municipio</th>
                 <th>Contacto</th>
-                <th>direccion</th>
-                <th>pais</th>
-                <th>zona</th>
-                <th>canal</th>
-                <th>email</th>
-                <th>status</th>
+                <th>Direccion</th>
+                <th>Pais</th>
+                <th>Zona</th>
+                <th>Canal</th>
+                <th>Email</th>
+                <th>Status</th>
             </tr>
         </thead>
     </table>
@@ -41,6 +40,4 @@
     </script>
 
 
-</div>  
-</div>  
 </div>  

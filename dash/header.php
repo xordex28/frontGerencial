@@ -1,5 +1,5 @@
 <?php
-require_once("config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
+
 //require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
 ?>
 <header class="topbar">
@@ -8,7 +8,7 @@ require_once("config/db.php"); //Contiene las variables de configuracion para co
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" onclick="page('page/inicio.php')" href="./">
+            <a class="navbar-brand" onclick="page('page/inicio.php')">
                 <!-- Logo icon --><b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->

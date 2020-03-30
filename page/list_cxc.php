@@ -5,8 +5,7 @@ include('../arch/datatables.php');
 include('../arch/kpi.php');
 
 ?>   
-<div class="page-wrapper">
-  <div class="container-fluid">
+
     <br>
     <h4>Cuentas Por Cobrar</h4>
     <div class="form-group" >
@@ -35,14 +34,14 @@ include('../arch/kpi.php');
   <thead>
     <tr>
       <th></th>
-      <th>nombres</th>
-      <th>nombre</th>
-      <th>iddoc</th>
-      <th>fechaemision</th>
-      <th>fechavencimiento.</th>
-      <th>montooriginal</th>
-      <th>montoabonado</th>
-      <th>saldoactual</th>
+      <th>Nombres</th>
+      <th>Nombre</th>
+      <th>Iddoc</th>
+      <th>Fechaemision</th>
+      <th>Fechavencimiento.</th>
+      <th>Montooriginal</th>
+      <th>Montoabonado</th>
+      <th>Saldoactual</th>
 
     </tr>
   </thead>
@@ -72,5 +71,4 @@ include('../arch/kpi.php');
 
 
 </div>  
-</div> 
-</div> 
+

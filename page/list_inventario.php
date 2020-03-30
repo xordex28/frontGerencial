@@ -3,8 +3,7 @@
 session_start(); 
 include('../arch/datatables.php');
 ?>   
-<div class="page-wrapper">
-    <div class="container-fluid">
+
       <br>
       <h4>Ineventario</h4>
       
@@ -31,12 +30,12 @@ include('../arch/datatables.php');
             <th></th>
             <th>Codigo</th>
             <th>Item</th>
-            <th>presentacion</th>
+            <th>Presentacion</th>
             <th>Precio_A</th>
             <th>Precio_B.</th>
             <th>Precio_C</th>
             <th>Precio_D</th>
-            <th>existencia</th>
+            <th>Existencia</th>
 
         </tr>
     </thead>
@@ -62,5 +61,4 @@ include('../arch/datatables.php');
     </script>
  
 </div>  
-</div>  
-</div>  
+ 

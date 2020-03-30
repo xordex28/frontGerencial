@@ -24,6 +24,12 @@ function GetClientes($almacen){
   $obj = json_decode($response);
 
   foreach ($obj as $key => $value){
+    $status = "";
+    if($value->{'status'}==0){
+      $status = 'Inactivo';
+    }else{
+      $status = 'Activo';
+    }
     $subdata=array();
     $subdata[] = '';
     $subdata[] = $value->{'cedula'};
@@ -39,7 +45,7 @@ function GetClientes($almacen){
     $subdata[] = $value->{'zona'};
     $subdata[] = $value->{'canal'};
     $subdata[] = $value->{'email'};
-    $subdata[] = $value->{'status'};
+    $subdata[] = $status;
     
     $datas[]=$subdata;
   }
@@ -109,12 +115,11 @@ function GetInventary($sql){
     $subdata[] = $value->{'Codigo'};
     $subdata[] = $value->{'Item'};
     $subdata[] = $value->{'presentacion'};
-    $subdata[] = $value->{'Precio_A'};
-    $subdata[] = $value->{'Precio_B'};
-    $subdata[] = $value->{'Precio_C'};
-    $subdata[] = $value->{'Precio_D'};
-    $subdata[] = $value->{'existencia'};
-
+    $subdata[] = isset($value->{'Precio_A'})?number_format($value->{'Precio_A'},2,',','.'):'0';
+    $subdata[] = isset($value->{'Precio_B'})?number_format($value->{'Precio_B'},2,',','.'):'0';
+    $subdata[] = isset($value->{'Precio_C'})?number_format($value->{'Precio_C'},2,',','.'):'0';
+    $subdata[] = isset($value->{'Precio_D'})?number_format($value->{'Precio_D'},2,',','.'):'0';
+    $subdata[] = isset($value->{'existencia'})?number_format($value->{'existencia'},2,',','.'):'0';
     
     $datas[]=$subdata;
   }
@@ -200,6 +205,12 @@ function GetProveedores($almacen){
   $obj = json_decode($response);
 
   foreach ($obj as $key => $value){
+        $status = "";
+    if($value->{'status'}==0){
+      $status = 'Inactivo';
+    }else{
+      $status = 'Activo';
+    }
     $subdata=array();
     $subdata[] = '';
     $subdata[] = $value->{'Rif'};
@@ -210,7 +221,7 @@ function GetProveedores($almacen){
     $subdata[] = $value->{'Tlf3'};
     $subdata[] = $value->{'Email'};
     $subdata[] = $value->{'Direccion'};
-    $subdata[] = $value->{'status'};
+    $subdata[] = $status;
 
     
     $datas[]=$subdata;

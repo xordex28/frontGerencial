@@ -1,15 +1,5 @@
 <?php
-// checking for minimum PHP version
-if (version_compare(PHP_VERSION, '5.3.7', '<')) {
-    exit("Sorry, Simple PHP Login does not run on a PHP version smaller than 5.3.7 !");
-} else if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-    // if you are using PHP 5.3 or PHP 5.4 you have to include the password_api_compatibility_library.php
-    // (this library adds the PHP 5.5 password hashing functions to older versions of PHP)
-    require_once("libraries/password_compatibility_library.php");
-}
 
-// include the configs / constants for the database connection
-require_once("config/db.php");
 
 // load the login class
 require_once("classes/Login.php");
@@ -40,7 +30,7 @@ if ($login->isUserLoggedIn() == true) {
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Material Pro Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <title>Sistema Gerencial</title>
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -71,7 +61,7 @@ if ($login->isUserLoggedIn() == true) {
             <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" method="post" accept-charset="utf-8" action="login.php" name="loginform" autocomplete="off" role="form">
-                    <h3 class="box-title m-b-20">Inicio de Sección</h3>
+                    <h3 class="box-title m-b-20">Inicio de Sesión</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="text" required="" placeholder="Username" name="user_name"> </div>
@@ -83,7 +73,7 @@ if ($login->isUserLoggedIn() == true) {
 
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
-                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" name="login" id="submit">Log In</button>
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" name="login" id="submit">Acceder</button>
                         </div>
                     </div>
 
@@ -126,3 +116,4 @@ if ($login->isUserLoggedIn() == true) {
 }
 
 
+?>

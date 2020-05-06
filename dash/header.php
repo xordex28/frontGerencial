@@ -1,7 +1,3 @@
-<?php
-
-//require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
-?>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
         <!-- ============================================================== -->
@@ -19,7 +15,7 @@
                 <!--End Logo icon -->
                 <!-- Logo text --><span>
                     <!-- dark Logo text -->
-                    <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                    <!-- <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" /> -->
                     <!-- Light Logo text -->
                     <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
         </div>
@@ -54,7 +50,7 @@
                                     );
 
                                     curl_setopt_array($curlHandler, [
-                                        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/useralmacen',
+                                        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/useralmacen',
                                         CURLOPT_RETURNTRANSFER => true,
                                         CURLINFO_HEADER_OUT => true,
 

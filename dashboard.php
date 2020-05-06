@@ -3,6 +3,8 @@ session_start();
 if (!isset($_SESSION['user_login_status']) and $_SESSION['user_login_status'] != 1) {
   header("location: login.php");
   exit;
+}else{
+  require_once('./config.php');
 }
 ?>
 
@@ -25,7 +27,7 @@ if (!isset($_SESSION['user_login_status']) and $_SESSION['user_login_status'] !=
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper">
+  <div id="main-wrapper">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -38,9 +40,9 @@ if (!isset($_SESSION['user_login_status']) and $_SESSION['user_login_status'] !=
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-  <?php
-  include('dash/sidebar.php');
-  ?>
+      <?php
+      include('dash/sidebar.php');
+      ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -78,9 +80,9 @@ if (!isset($_SESSION['user_login_status']) and $_SESSION['user_login_status'] !=
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-  <?php
-  include('dash/script.php');
-  ?>
+    <?php
+    include('dash/script.php');
+    ?>
 
   <script>
     $(document).ready(function() {

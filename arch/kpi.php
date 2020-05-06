@@ -1,6 +1,6 @@
 <?php
  
-
+ require_once('../config.php');
  function _data_last_month_day() { 
     $month = date('m');
     $year = date('Y');
@@ -24,7 +24,7 @@ function OnClientes($almacen){
     );
 
     curl_setopt_array($curlHandler, [
-  CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/onclientes',
+  CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/onclientes',
   CURLOPT_RETURNTRANSFER => true,
   CURLINFO_HEADER_OUT => true,
 
@@ -51,7 +51,7 @@ function OffClientes($almacen){
     );
 
     curl_setopt_array($curlHandler, [
-  CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/offclientes',
+  CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/offclientes',
   CURLOPT_RETURNTRANSFER => true,
   CURLINFO_HEADER_OUT => true,
 
@@ -78,7 +78,7 @@ function OnProductos($almacen){
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/onproductos',
+    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/onproductos',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -105,7 +105,7 @@ echo $obj->{'Producto'};
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/offproductos',
+    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/offproductos',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -132,7 +132,7 @@ echo $obj->{'Producto'};
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/salesdaydls',
+    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/salesdaydls',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -159,7 +159,7 @@ curl_close($curlHandler);
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/salesdaybs',
+    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/salesdaybs',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -186,7 +186,7 @@ curl_close($curlHandler);
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/salesmonthdls',
+    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/salesmonthdls',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -213,7 +213,7 @@ function SalesMonthBs($almacen){
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/salesmonthbs',
+    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/salesmonthbs',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -244,7 +244,7 @@ curl_close($curlHandler);
         );    
 
     curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/topProductos',
+        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/topProductos',
         CURLOPT_RETURNTRANSFER => true,
         CURLINFO_HEADER_OUT => true,
 
@@ -273,7 +273,7 @@ curl_close($curlHandler);
         );    
 
     curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/topClientes',
+        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/topClientes',
         CURLOPT_RETURNTRANSFER => true,
         CURLINFO_HEADER_OUT => true,
 
@@ -300,7 +300,7 @@ curl_close($curlHandler);
         );    
 
     curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/topVendedores',
+        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/topVendedores',
         CURLOPT_RETURNTRANSFER => true,
         CURLINFO_HEADER_OUT => true,
 
@@ -320,7 +320,7 @@ curl_close($curlHandler);
     $curlHandler = curl_init();
 
     curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/getZonas',
+        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/getZonas',
         CURLOPT_RETURNTRANSFER => true,
         CURLINFO_HEADER_OUT => true,
     ]);
@@ -337,7 +337,7 @@ curl_close($curlHandler);
     $curlHandler = curl_init();
 
     curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/getCanal',
+        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/getCanal',
         CURLOPT_RETURNTRANSFER => true,
         CURLINFO_HEADER_OUT => true,
     ]);
@@ -354,7 +354,7 @@ curl_close($curlHandler);
     $curlHandler = curl_init();
 
     curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/getLinea',
+        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/getLinea',
         CURLOPT_RETURNTRANSFER => true,
         CURLINFO_HEADER_OUT => true,
     ]);
@@ -372,12 +372,12 @@ curl_close($curlHandler);
     $url = "";
     if(isset($linea)){
         if($linea!=""){
-            $url ="http://oesvica.ddns.net:9011/slimframework_v3/getSubLinea/".$linea;
+            $url ="http://'.URL.':'.PORT.'/'.DIR.'/getSubLinea/".$linea;
         }else{
-            $url = "http://oesvica.ddns.net:9011/slimframework_v3/getSubLinea";
+            $url = "http://'.URL.':'.PORT.'/'.DIR.'/getSubLinea";
         }
     }else{
-        $url = "http://oesvica.ddns.net:9011/slimframework_v3/getSubLinea";
+        $url = "http://'.URL.':'.PORT.'/'.DIR.'/getSubLinea";
     }
     curl_setopt_array($curlHandler, [
         CURLOPT_URL => $url,
@@ -401,7 +401,7 @@ curl_close($curlHandler);
     );
 
     curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/documentsExpiredBs',
+    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/documentsExpiredBs',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -428,7 +428,7 @@ curl_close($curlHandler);
     );
 
     curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/documentsExpiredDls',
+    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/documentsExpiredDls',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 

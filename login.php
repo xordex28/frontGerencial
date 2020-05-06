@@ -70,7 +70,35 @@ if ($login->isUserLoggedIn() == true) {
                         <div class="col-xs-12">
                             <input class="form-control" type="password" required="" placeholder="Password" name="user_password"> </div>
                     </div>
-
+                    <?php
+                    if (isset($login)) {
+                        if ($login->errors) {
+                            ?>
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <strong>Error!</strong> 
+                            
+                            <?php 
+                            foreach ($login->errors as $error) {
+                                echo $error;
+                            }
+                            ?>
+                            </div>
+                            <?php
+                        }
+                        if ($login->messages) {
+                            ?>
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <strong>Aviso!</strong>
+                            <?php
+                            foreach ($login->messages as $message) {
+                                echo $message;
+                            }
+                            ?>
+                            </div> 
+                            <?php 
+                        }
+                    }
+                    ?>
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
                             <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" name="login" id="submit">Acceder</button>

@@ -21,6 +21,7 @@ function page(url) {
   });
 }
 
+
 function reload() {
   $.ajax({
     type: "POST",
@@ -36,7 +37,11 @@ function table_cliente() {
     ajax: {
       url: "module/table_cliente.php"
     },
-
+    dom: 'Bfrtip',
+    buttons: [
+        'excel', 'print'
+    ]
+    ,
     scrollY:        false,
     scrollX:        false,
     scrollCollapse: false,
@@ -59,7 +64,11 @@ function table_inventario(moneda,iva) {
     type:"post",
     data:  {moneda:moneda,iva:iva}
   },
-  
+  dom: 'Bfrtip',
+  buttons: [
+      'excel', 'print'
+  ]
+  ,
 
     scrollY:        false,
     scrollX:        false,
@@ -73,15 +82,20 @@ function table_inventario(moneda,iva) {
   });
 }
 
-function table_cxc(moneda,fechaD,fechaH) {
+function table_cxc(moneda,fechaD,fechaH,pendiente) {
  // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
 
  var dataTable = $('#tbcxc').removeAttr('width').DataTable( {
   ajax: {
     url: "module/table_cxc.php",
     type:"post",
-    data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH}
+    data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH, pendiente:pendiente}
   },
+  dom: 'Bfrtip',
+  buttons: [
+      'excel', 'print'
+  ]
+  ,
 
     scrollY:        false,
     scrollX:        false,
@@ -104,6 +118,11 @@ function table_cxp(moneda,fechaD,fechaH) {
     type:"post",
     data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH}
   },
+  dom: 'Bfrtip',
+  buttons: [
+      'excel', 'print'
+  ]
+  ,
 
     scrollY:        false,
     scrollX:        false,
@@ -117,6 +136,40 @@ function table_cxp(moneda,fechaD,fechaH) {
   });
 }
 
+function table_desp(tipo,fechaD,fechaH,check) {
+ // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
+
+ var dataTable = $('#tbdesp').removeAttr('width').DataTable( {
+  ajax: {
+    url: "module/table_despacho.php",
+    type:"post",
+    data:  {tipo:tipo,fechaD:fechaD, fechaH:fechaH, check:check}
+  },
+  rowCallback: function(row, data, index){
+  	if(data[7]=='Anulado'){
+    	$(row).find('td').css('color', 'red');
+    }
+
+  },
+  dom: 'Bfrtip',
+  buttons: [
+      'excel', 'print'
+  ]
+  ,
+
+    scrollY:        false,
+    scrollX:        false,
+    scrollCollapse: false,
+    paging:         true,
+    columnDefs: [
+    { className: 'control',
+    orderable: false, targets: 0}
+    ],
+    fixedColumns: true
+  });
+}
+
+
 function table_proveedores() {
   var dataTable = $('#tbproveedores').removeAttr('width').DataTable( {
     ajax: {
@@ -128,6 +181,11 @@ function table_proveedores() {
         target: "tr"
       }
     },
+    dom: 'Bfrtip',
+  buttons: [
+      'excel', 'print'
+  ]
+  ,
 
     scrollY:        false,
     scrollX:        false,

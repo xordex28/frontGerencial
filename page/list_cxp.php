@@ -24,25 +24,24 @@ include('../arch/kpi.php');
       <option value="1">Usd</option>
     </select>
   </span>
- <!-- <span style="margin-left:20px;">
+  <span style="margin-left:20px;">
 
-   <button type="button" onclick="change()" class="btn btn-primary btn-ms" name="change" id="change" >Listar</button> 
- </span>
- -->
+<button type="button" onclick="change()" class="btn btn-primary btn-ms" name="change" id="change" >Listar</button> 
+</span>
 </div>
 <div style="max-width: 100vw;overflow: auto;">
 <table id="tbcxp" class="display responsive nowrap" cellspacing="0" >
   <thead>
     <tr>
       <th></th>
-      <th>Nombreproveedor</th>
+      <th>Proveedor</th>
       <th>Nombre</th>
       <th>Docasoc</th>
       <th>Fechadoc</th>
       <th>Fechapago.</th>
       <th>Total</th>
-      <th>Montoabonado</th>
-      <th>Saldoactual</th>
+      <th>Abonado</th>
+      <th>Saldo</th>
 
     </tr>
   </thead>

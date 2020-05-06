@@ -1,4 +1,7 @@
-<meta charset="utf-8">
+
+
+
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +28,7 @@
     <link href="css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="css/colors/blue.css" id="theme" rel="stylesheet">
-    
+ 
     
     <style type="text/css"> 
         .collapse > li > a:hover{

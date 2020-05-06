@@ -4,258 +4,366 @@ function page(url) {
     url: url,
     success: function(response) {
       $("#div-results").html(response);
-      $.ajax({
-        type: "POST",
-        data: { page: url },
-        url: "arch/session.php",
-        success: function(response) {
-          ////.log(response);
-        }
-      });
-      if (url == "page/inicio.php") {
-        loadTopProductos();
-        loadTopClientes();
-        loadTopVendedores();
-      }
     }
   });
 }
 
+function table_cliente(){
+  var dataTable=$('#tbcliente').DataTable({
+      "ajax":{
+          url:"module/table_cliente.php"
+      },
+          /*    initComplete: function (i,j) {
+          this.api().columns().every( function () {
+              var column = this;
+              var select = $('<select><option value=""></option></select>')
+                  .appendTo( $(column.footer()).empty() )
+                  .on( 'change', function () {
+                      var val = $.fn.dataTable.util.escapeRegex(
+                          $(this).val()
+                      );
 
-function reload() {
+                      column
+                          .search( val ? '^'+val+'$' : '', true, false )
+                          .draw();
+                  } );
+
+              column.data().unique().sort().each( function ( d, j ) {
+                  select.append( '<option value="'+d+'">'+d+'</option>' )
+              } );
+          } );*/
+      //},
+      responsive: {
+          details: {
+              type: 'column',
+              target: 'tr'
+          }
+      },
+      columnDefs: [ {
+          className: 'control',
+          orderable: false,
+          targets:   0
+      } ],
+      order: [ 2, 'des' ],
+   
+
+  });
+/*
+  $("#tbcliente tfoot th").each( function ( i ) {
+      var select = $('<select><option value=""></option></select>')
+          .appendTo( $(this).empty() )
+          .on( 'change', function () {
+              table.column( i )
+                  .search( $(this).val() )
+                  .draw();
+          } );
+
+      table.column( i ).data().unique().sort().each( function ( d, j ) {
+          select.append( '<option value="'+d+'">'+d+'</option>' )
+      } );
+  });
+
+  $("#tbcliente tfoot th").each( function ( i ) {
+      var select = $('<select><option value=""></option></select>')
+          .appendTo( $(this).empty() )
+          .on( 'change', function () {
+              table.column( i )
+                  .search( $(this).val() )
+                  .draw();
+          } );
+
+      table.column( i ).data().unique().sort().each( function ( d, j ) {
+          select.append( '<option value="'+d+'">'+d+'</option>' )
+      } );
+  });*/
+
+
+};
+function table_concepto(tipo) {
+  var dataTable = $("#tbconcepto").DataTable({
+    retrieve: true,
+    processing: false,
+    serverSide: true,
+    ajax: {
+      url: "tabl_concepto.php",
+      type: "post",
+      data: { tipo: tipo }
+    }
+  });
+}
+function recargar_table_auto() {
+  var oTable = $("#tbcliente").DataTable();
+  oTable.ajax.reload();
+}
+
+function table_ubic(txtubic = "", txtcod = "") {
+  console.log("txtubic " + txtubic);
+  console.log("txtcod " + txtcod);
+  var dataTable = $("#tb").DataTable({
+    retrieve: true,
+    processing: false,
+    serverSide: true,
+    scrollY: "300px",
+    scrollCollapse: true,
+
+    ajax: {
+      url: "tabl_ubic.php",
+      type: "post",
+      data: {
+        txtubic: txtubic,
+        txtcod: txtcod
+      }
+    }
+  });
+}
+function recargar_table_ubic() {
+  var oTable = $("#tb").DataTable();
+  oTable.ajax.reload();
+}
+function nueva_asig(cliente, ubicacion, cargo, bono, valor) {
   $.ajax({
+    url: "arch/nueva_asig.php",
     type: "POST",
-    url: "arch/session.php",
-    success: function(response) {
-      page(response);
+    data: {
+      cliente: cliente,
+      ubicacion: ubicacion,
+      cargo: cargo,
+      bono: bono,
+      valor: valor
+    },
+    success: function(data) {
+      console.log(data);
+      if (data.trim() == "correcto") {
+        toastr.success("Se Guardo Correctamente", "Exitoso", {
+          positionClass: "toast-top-right",
+          timeOut: 1200,
+          preventDuplicates: true
+        });
+        //$("#guardar_vehiculo")[0].reset();
+      }
+
+      if (data.trim() == "error") {
+        toastr.error("No se Guardo correctamente", "Error", {
+          positionClass: "toast-top-right",
+          timeOut: 2500,
+          preventDuplicates: true
+        });
+      }
+
+      if (data.trim() == "existe") {
+        toastr.error("Ya existe el bono", "Error", {
+          positionClass: "toast-top-right",
+          timeOut: 2500,
+          preventDuplicates: true
+        });
+      }
+      // console.log(x);
+      //recargar_table_auto();
+    },
+    error: function(xhr, ajaOptions, thrownError) {
+      console.log(thrownError);
+      toastr.error(
+        "Paso un Problema en el servidor contactar con Dtto Desarrollo",
+        "Error",
+        {
+          positionClass: "toast-top-right",
+          timeOut: 2500,
+          preventDuplicates: true
+        }
+      );
     }
   });
 }
 
-function table_cliente() {
-  var dataTable = $('#tbcliente').removeAttr('width').DataTable( {
-    ajax: {
-      url: "module/table_cliente.php"
-    },
-    dom: 'Bfrtip',
-    buttons: [
-        'excel', 'print'
-    ]
-    ,
-    scrollY:        false,
-    scrollX:        false,
-    scrollCollapse: false,
-    paging:         true,
-    columnDefs: [
-    { className: 'control',
-    orderable: false, targets: 0 }
+function update_asig(id, valor) {
+  $.ajax({
+    url: "arch/update_asig.php",
+    type: "POST",
+    data: { id: id, valor: valor },
+    success: function(data) {
+      console.log(data);
+      if (data.trim() == "correcto") {
+        toastr.success("Se Guardo Correctamente", "Exitoso", {
+          positionClass: "toast-top-right",
+          timeOut: 1200,
+          preventDuplicates: true
+        });
+        //$("#guardar_vehiculo")[0].reset();
+      }
 
-
-    ],
-    fixedColumns: true
-  });
-
-}
-
-function table_inventario(moneda,iva) {
- var dataTable = $('#tbinventory').removeAttr('width').DataTable( {
-  ajax: {
-    url: "module/table_inventory.php",
-    type:"post",
-    data:  {moneda:moneda,iva:iva}
-  },
-  dom: 'Bfrtip',
-  buttons: [
-      'excel', 'print'
-  ]
-  ,
-
-    scrollY:        false,
-    scrollX:        false,
-    scrollCollapse: false,
-    paging:         true,
-    columnDefs: [
-    { className: 'control',
-    orderable: false, targets: 0 }
-    ],
-    fixedColumns: true
-  });
-}
-
-function table_cxc(moneda,fechaD,fechaH,pendiente) {
- // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
-
- var dataTable = $('#tbcxc').removeAttr('width').DataTable( {
-  ajax: {
-    url: "module/table_cxc.php",
-    type:"post",
-    data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH, pendiente:pendiente}
-  },
-  dom: 'Bfrtip',
-  buttons: [
-      'excel', 'print'
-  ]
-  ,
-
-    scrollY:        false,
-    scrollX:        false,
-    scrollCollapse: false,
-    paging:         true,
-    columnDefs: [
-    { className: 'control',
-    orderable: false, targets: 0}
-    ],
-    fixedColumns: true
-  });
-}
-
-function table_cxp(moneda,fechaD,fechaH) {
- // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
-
- var dataTable = $('#tbcxp').removeAttr('width').DataTable( {
-  ajax: {
-    url: "module/table_cxp.php",
-    type:"post",
-    data:  {moneda:moneda,fechaD:fechaD, fechaH:fechaH}
-  },
-  dom: 'Bfrtip',
-  buttons: [
-      'excel', 'print'
-  ]
-  ,
-
-    scrollY:        false,
-    scrollX:        false,
-    scrollCollapse: false,
-    paging:         true,
-    columnDefs: [
-    { className: 'control',
-    orderable: false, targets: 0}
-    ],
-    fixedColumns: true
-  });
-}
-
-function table_desp(tipo,fechaD,fechaH,check) {
- // testAjax('module/table_cxc.php','post',{moneda:moneda,fechaD:fechaD, fechaH:fechaH});
-
- var dataTable = $('#tbdesp').removeAttr('width').DataTable( {
-  ajax: {
-    url: "module/table_despacho.php",
-    type:"post",
-    data:  {tipo:tipo,fechaD:fechaD, fechaH:fechaH, check:check}
-  },
-  rowCallback: function(row, data, index){
-  	if(data[7]=='Anulado'){
-    	$(row).find('td').css('color', 'red');
-    }
-
-  },
-  dom: 'Bfrtip',
-  buttons: [
-      'excel', 'print'
-  ]
-  ,
-
-    scrollY:        false,
-    scrollX:        false,
-    scrollCollapse: false,
-    paging:         true,
-    columnDefs: [
-    { className: 'control',
-    orderable: false, targets: 0}
-    ],
-    fixedColumns: true
-  });
-}
-
-
-function table_proveedores() {
-  var dataTable = $('#tbproveedores').removeAttr('width').DataTable( {
-    ajax: {
-      url: "module/table_proveedores.php"
-    },
-    responsive: {
-      details: {
-        type: "column",
-        target: "tr"
+      if (data.trim() == "error") {
+        toastr.error("No se Guardo correctamente", "Error", {
+          positionClass: "toast-top-right",
+          timeOut: 2500,
+          preventDuplicates: true
+        });
       }
     },
-    dom: 'Bfrtip',
-  buttons: [
-      'excel', 'print'
-  ]
-  ,
-
-    scrollY:        false,
-    scrollX:        false,
-    scrollCollapse: false,
-    paging:         true,
-    columnDefs: [
-    { className: 'control',
-    orderable: false, targets: 0 }
-    ],
-    fixedColumns: true
+    error: function(xhr, ajaOptions, thrownError) {
+      console.log(thrownError);
+      toastr.error(
+        "Paso un Problema en el servidor contactar con Dtto Desarrollo",
+        "Error",
+        {
+          positionClass: "toast-top-right",
+          timeOut: 2500,
+          preventDuplicates: true
+        }
+      );
+    }
   });
-
 }
 
-function loadTopVendedores() {
-  ////.log("h");
-  let codA = $("#cod_Almacen").val();
-  let fechaD = $("#fecDTopVendedor").val();
-  let fechaH = $("#fecHTopVendedor").val();
-  let topVendedor = $("#topVendedor").val();
-  let moneda = $("#monedaTopVendedor").val();
-  const data = {
-    moneda: moneda,
-    top: topVendedor,
-    fechaD: fechaD,
-    fechaH: fechaH,
-    cod_almacen: codA
-  };
-  ////.log(data);
-  buildGraphPie(
-    "topCV",
-    "views/topVendedores.php",
-    data,
-    "POST",
-    "nombrevendedor",
-    "ventas",
-    "Top #" + data.top + " VENDEDORES CON MAS VENTAS EN " + data.moneda,
-    true
-    );
+function actualizacion_ibarti(start, end, contrato, mes, dia_end) {
+  $.ajax({
+    url: "arch/update_ibarti.php",
+    type: "POST",
+    data: {
+      start: start,
+      end: end,
+      contrato: contrato,
+      mes: mes,
+      dia_end: dia_end
+    },
+    beforeSend: function() {
+      toastr.warning("Se esta Generando el TXT, Por Favor espere");
+    },
+    success: function(data) {
+      console.log(data);
+      if (data.trim() == "correcto") {
+        console.log(data);
+        toastr.success("Se Genero el TXT correctamente", "Exitoso", {
+          positionClass: "toast-top-right",
+          timeOut: 902500,
+          preventDuplicates: true
+        });
+        //$("#guardar_vehiculo")[0].reset();
+      } else {
+        toastr.error(
+          "Paso un Problema en el servidor, intente nuevamente de persistir el error, contactar con Dtto Desarrollo",
+          "Error",
+          {
+            positionClass: "toast-top-right",
+            timeOut: 2500,
+            preventDuplicates: true
+          }
+        );
+      }
+    },
+    error: function(xhr, ajaOptions, thrownError) {
+      console.log(thrownError);
+      toastr.error(
+        "Paso un Problema en el servidor contactar con Dtto Desarrollo",
+        "Error",
+        {
+          positionClass: "toast-top-right",
+          timeOut: 2500,
+          preventDuplicates: true
+        }
+      );
+    }
+  });
 }
 
-function loadTopClientes() {
-  ////.log("h");
-  let codA = $("#cod_Almacen").val();
-  let fechaD = $("#fecDTopCliente").val();
-  let fechaH = $("#fecHTopCliente").val();
-  let topCliente = $("#topCliente").val();
-  let zona = $("#zonaTopCliente").val();
-  let canal = $("#canalTopCliente").val();
-  let moneda = $("#monedaTopCliente").val();
-  const data = {
-    moneda: moneda,
-    top: topCliente,
-    fechaD: fechaD,
-    fechaH: fechaH,
-    cod_almacen: codA,
-    zona: zona,
-    canal: canal
-  };
-  ////.log(data);
-  buildGraphBar(
-    "topCC",
-    "views/topClientes.php",
-    data,
-    "POST",
-    "str_cliente_nombres",
-    "ventas",
-    "Top #" + data.top + " CLIENTES CON MAS COMPRAS EN " + data.moneda,
-    true
-    );
+function actualizacion_ibarti_semanal(
+  start,
+  end,
+  contrato,
+  mes,
+  dia_end,
+  porc
+) {
+  $.ajax({
+    url: "arch/snem_var.php",
+    type: "POST",
+    data: {
+      start: start,
+      end: end,
+      contrato: contrato,
+      mes: mes,
+      dia_end: dia_end,
+      porc
+    },
+    beforeSend: function() {
+      toastr.warning("Se esta Generando el TXT, Por Favor espere");
+    },
+    success: function(data) {
+      console.log(data);
+      if (data.trim() == "correcto") {
+        console.log(data);
+        toastr.success("Se Genero el TXT correctamente", "Exitoso", {
+          positionClass: "toast-top-right",
+          timeOut: 902500,
+          preventDuplicates: true
+        });
+        //$("#guardar_vehiculo")[0].reset();
+      } else {
+        toastr.error(
+          "Paso un Problema en el servidor, intente nuevamente de persistir el error, contactar con Dtto Desarrollo",
+          "Error",
+          {
+            positionClass: "toast-top-right",
+            timeOut: 2500,
+            preventDuplicates: true
+          }
+        );
+      }
+    },
+    error: function(xhr, ajaOptions, thrownError) {
+      console.log(thrownError);
+      toastr.error(
+        "Paso un Problema en el servidor contactar con Dtto Desarrollo",
+        "Error",
+        {
+          positionClass: "toast-top-right",
+          timeOut: 2500,
+          preventDuplicates: true
+        }
+      );
+    }
+  });
+}
+
+function reporte_asignacion() {
+  $.ajax({
+    url: "reportes/reporte_asignacion.php",
+
+    success: function(data) {
+      console.log(data);
+      if (data.trim() == "correcto") {
+        console.log(data);
+        toastr.success("Se Genero el TXT correctamente", "Exitoso", {
+          positionClass: "toast-top-right",
+          timeOut: 902500,
+          preventDuplicates: true
+        });
+        //$("#guardar_vehiculo")[0].reset();
+      } else {
+        toastr.error(
+          "Paso un Problema en el servidor, intente nuevamente de persistir el error, contactar con Dtto Desarrollo",
+          "Error",
+          {
+            positionClass: "toast-top-right",
+            timeOut: 2500,
+            preventDuplicates: true
+          }
+        );
+      }
+    },
+    error: function(data, xhr, ajaOptions, thrownError) {
+      console.log(thrownError);
+      console.log(data);
+      toastr.error(
+        "Paso un Problema en el servidor contactar con Dtto Desarrollo",
+        "Error",
+        {
+          positionClass: "toast-top-right",
+          timeOut: 2500,
+          preventDuplicates: true
+        }
+      );
+    }
+  });
 }
 
 function loadTopProductos() {
@@ -263,26 +371,59 @@ function loadTopProductos() {
   let fechaD = $("#fecDTopProducto").val();
   let fechaH = $("#fecHTopProducto").val();
   let topProducto = $("#topProducto").val();
-  let lineaTopProducto = $("#lineaTopProducto").val();
-  let subLineaTopProducto = $("#subLineaTopProducto").val();
   const data = {
     top: topProducto,
     fechaD: fechaD,
     fechaH: fechaH,
-    cod_almacen: codA,
-    linea: lineaTopProducto,
-    subLinea: subLineaTopProducto
+    cod_almacen: codA
   };
-  buildGraphBar(
-    "topPC",
-    "views/topProductos.php",
-    data,
-    "POST",
-    "descripcion",
-    "VENDIDOS",
-    "Top #" + data.top + " PRODUCTOS MAS VENDIDOS",
-    true
-    );
+
+  $.ajax({
+    url: "views/topProductos.php",
+    type: "POST",
+    data: data,
+    success: function(respuesta) {
+      const dataA = JSON.parse(respuesta);
+      console.log(dataA);
+      if (dataA) {
+        const labels = dataA.map(res => res.descripcion);
+        const vals = dataA.map(res => Number(res.VENDIDOS));
+        const colors = dataA.map(() => getRandomColor());
+        $("#topPC").html('<canvas id="topP"></canvas>');
+        var ctx = document.getElementById("topP").getContext("2d");
+        console.log(colors);
+        var myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Top #"+data.top+" Productos Vendidos",
+                data: vals,
+                backgroundColor: colors,
+                borderWidth: 1
+              }
+            ]
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
+            }
+          }
+        });
+      }
+    },
+    error: function() {
+      console.log("No se ha podido obtener la información");
+    }
+  });
+  // $('#configTP').hide();
 }
 
 function getRandomColor() {
@@ -292,217 +433,4 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
-}
-
-function buildGraphBar(
-  idContainer,
-  urlAjax,
-  dataAjax,
-  methodAjax,
-  nameT,
-  nameV,
-  titulo,
-  horizontal
-  ) {
-  var myChart;
-  if (urlAjax && idContainer && dataAjax && nameT && nameV) {
-    $("#" + idContainer).html(
-      '<div class="lds-load " style="display:flex;justify-content: space-between;" ><div></div><div></div><div></div></div>'
-      );
-    $.ajax({
-      url: urlAjax,
-      type: methodAjax,
-      data: dataAjax,
-      success: function(respuesta) {
-        //.log(respuesta);
-        $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
-        const dataA = JSON.parse(respuesta);
-        if (dataA["res"] && dataA["res"].length > 0) {
-          const labels = dataA["res"].map(res => res[nameT]);
-          const vals = dataA["res"].map(res => {
-            return Number.parseFloat(res[nameV]);
-          });
-          const colors = dataA["res"].map(() => getRandomColor());
-          var ctx = document.getElementById(`${idContainer}P`).getContext("2d");
-          myChart = new Chart(ctx, {
-            type: !horizontal ? "bar" : "horizontalBar",
-            data: {
-              labels: labels,
-              datasets: [
-              {
-                label: titulo,
-                data: vals,
-                backgroundColor: colors,
-                borderWidth: 1
-              }
-              ]
-            },
-            options: {
-              tooltips: {
-                callbacks: {
-                  label: function(tooltipItem, data,i) {
-                    console.log(data,tooltipItem)
-                    const index = tooltipItem['index'];
-                    const indexD = tooltipItem['datasetIndex'];
-                    const formatedValueS = data['datasets'][indexD]['data'][index].toString().split('.');
-                    const entera = formatedValueS[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    const decimal = (formatedValueS[1])?formatedValueS[1].substring(0,1):0;
-                    // .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    const labelL = `${data['labels'][index]} ${dataAjax.moneda?dataAjax.moneda:''}:${entera}.${decimal}`
-                    return labelL
-                  }
-                }
-              },
-              scales: {
-                xAxes: [
-                {
-                  display: horizontal,
-                  ticks: {
-                    beginAtZero: true,
-                    callback: function(value, index, values) {
-                      console.log(value,index,values)
-                      if (dataAjax.moneda) {
-                        if (parseInt(value) >= 1000) {
-                          return (
-                            dataAjax.moneda +
-                            value
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                            );
-                        } else {
-                          return dataAjax.moneda + value;
-                        }
-                      } else {
-                        return value;
-                      }
-                    }
-                  }
-                }
-                ],
-                yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true
-                  }
-                }
-                ]
-              }
-            }
-          });
-        } else {
-          $("#" + idContainer).html(`<h5>${titulo} SIN DATA</h5>`);
-        }
-      },
-      error: function() {
-        $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
-        ////.log("No se ha podido obtener la información");
-      }
-    });
-  }
-  return myChart;
-}
-
-function buildGraphPie(
-  idContainer,
-  urlAjax,
-  dataAjax,
-  methodAjax,
-  nameT,
-  nameV,
-  titulo,
-  horizontal
-  ) {
-  var myChart;
-  if (urlAjax && idContainer && dataAjax && nameT && nameV) {
-    $("#" + idContainer).html(
-      '<div class="lds-load " style="display:flex;justify-content: space-between;" ><div></div><div></div><div></div></div>'
-      );
-    $.ajax({
-      url: urlAjax,
-      type: methodAjax,
-      data: dataAjax,
-      success: function(respuesta) {
-        //.log(respuesta);
-        $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
-        const dataA = JSON.parse(respuesta);
-        if (dataA["res"] && dataA["res"].length > 0) {
-          const labels = dataA["res"].map(res => res[nameT]);
-          const vals = dataA["res"].map(res => {
-            return Number.parseFloat(res[nameV]);
-          });
-          const colors = dataA["res"].map(() => getRandomColor());
-          var ctx = document.getElementById(`${idContainer}P`).getContext("2d");
-          myChart = new Chart(ctx, {
-            type: !horizontal ? "pie" : "doughnut",
-            data: {
-              labels: labels,
-              datasets: [
-              {
-                label: titulo,
-                data: vals,
-                backgroundColor: colors,
-                borderWidth: 1
-              }
-              ]
-            },
-            options: {
-              tooltips: {
-                callbacks: {
-                  label: function(tooltipItem, data,i) {
-                    
-                    const index = tooltipItem['index'];
-                    const indexD = tooltipItem['datasetIndex'];
-                    const formatedValueS = data['datasets'][indexD]['data'][index].toString().split('.');
-                    const entera = formatedValueS[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    const decimal = (formatedValueS[1])?formatedValueS[1].substring(0,1):0;
-                    // .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    const labelL = `${data['labels'][index]} ${dataAjax.moneda?dataAjax.moneda:''}:${entera}.${decimal}`
-                    return labelL
-                  }
-                }
-              }
-            }
-          });
-        } else {
-          $("#" + idContainer).html(`<h5>${titulo} SIN DATA</h5>`);
-        }
-      },
-      error: function() {
-        $("#" + idContainer).html(`<canvas id="${idContainer}P"></canvas>`);
-        ////.log("No se ha podido obtener la información");
-      }
-    });
-  }
-  return myChart;
-}
-
-function getSubLinea(linea) {
-  ////.log(linea);
-  $.ajax({
-    type: "POST",
-    url: "views/getSubLinea.php",
-    data: { linea: linea },
-    success: function(response) {
-      ////.log(response);
-      const data = JSON.parse(response);
-      $("#subLineaTopProducto").html('<option value="">...</option>');
-      data.forEach(sub => {
-        $("#subLineaTopProducto").append(
-          `<option value= "${sub["codigo"]}">${sub["descripcion"]}</option>`
-          );
-      });
-    }
-  });
-}
-
-function testAjax(url,metodo,data){
-  $.ajax({
-    type: metodo,
-    url: url,
-    data: data,
-    success: function(response) {
-      console.log(response);
-      console.log(JSON.parse(response));
-    }
-  });
 }

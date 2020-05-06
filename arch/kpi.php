@@ -1,6 +1,6 @@
 <?php
  
- require_once('../config.php');
+
  function _data_last_month_day() { 
     $month = date('m');
     $year = date('Y');
@@ -21,52 +21,25 @@ function OnClientes($almacen){
     $data = array(
   'target_almacen' => $almacen
   
-    );
+);
 
-    curl_setopt_array($curlHandler, [
-  CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/onclientes',
+curl_setopt_array($curlHandler, [
+  CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/onclientes',
   CURLOPT_RETURNTRANSFER => true,
   CURLINFO_HEADER_OUT => true,
 
   CURLOPT_POST => true,
 
   CURLOPT_POSTFIELDS => $data,
-    ]);
+]);
 
-    $response = curl_exec($curlHandler);
+$response = curl_exec($curlHandler);
 
-    curl_close($curlHandler);
+curl_close($curlHandler);
 
-    $obj = json_decode($response);
+$obj = json_decode($response);
 
-    echo $obj->{'Clientes'};
-
-}
-
-function OffClientes($almacen){
-    $curlHandler = curl_init();
-    $data = array(
-  'target_almacen' => $almacen
-  
-    );
-
-    curl_setopt_array($curlHandler, [
-  CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/offclientes',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLINFO_HEADER_OUT => true,
-
-  CURLOPT_POST => true,
-
-  CURLOPT_POSTFIELDS => $data,
-    ]);
-
-    $response = curl_exec($curlHandler);
-
-    curl_close($curlHandler);
-
-    $obj = json_decode($response);
-
-    echo $obj->{'Clientes'};
+echo $obj->{'Clientes'};
 
 }
 
@@ -78,7 +51,7 @@ function OnProductos($almacen){
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/onproductos',
+    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/onproductos',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -105,7 +78,7 @@ echo $obj->{'Producto'};
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/offproductos',
+    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/offproductos',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -132,7 +105,7 @@ echo $obj->{'Producto'};
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/salesdaydls',
+    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/salesdaydls',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -147,7 +120,7 @@ curl_close($curlHandler);
 
  $obj = json_decode($response);
  
- echo number_format($obj->{'Total'},2,',','.');
+echo $obj->{'Total'};
 
   }
 
@@ -159,7 +132,7 @@ curl_close($curlHandler);
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/salesdaybs',
+    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/salesdaybs',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -174,7 +147,7 @@ curl_close($curlHandler);
 
  $obj = json_decode($response);
  
- echo number_format($obj->{'Total'},2,',','.');
+echo $obj->{'Total'};
 
   }
 
@@ -186,7 +159,7 @@ curl_close($curlHandler);
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/salesmonthdls',
+    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/salesmonthdls',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -201,7 +174,7 @@ curl_close($curlHandler);
 
  $obj = json_decode($response);
  
- echo number_format($obj->{'Total'},2,',','.');
+echo $obj->{'Total'};
 
 }
 
@@ -213,7 +186,7 @@ function SalesMonthBs($almacen){
 );
 
 curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/salesmonthbs',
+    CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/salesmonthbs',
     CURLOPT_RETURNTRANSFER => true,
     CURLINFO_HEADER_OUT => true,
 
@@ -228,23 +201,21 @@ curl_close($curlHandler);
 
  $obj = json_decode($response);
  
- echo number_format($obj->{'Total'},2,',','.');
+echo $obj->{'Total'};
 
   }
 
-  function topProductos($top,$fD,$fH,$codAlmacen,$linea,$subLinea){
+  function topProductos($top,$fD,$fH,$codAlmacen){
     $curlHandler = curl_init();
     $data = array(
     'top' => $top,
     'fD' => $fD,
     'fH' => $fH,
-    'codAlmacen' => $codAlmacen,
-    'linea' => $linea,
-    'subLinea' => $subLinea
+    'codAlmacen' => $codAlmacen
         );    
 
     curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/topProductos',
+        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/topProductos',
         CURLOPT_RETURNTRANSFER => true,
         CURLINFO_HEADER_OUT => true,
 
@@ -260,192 +231,9 @@ curl_close($curlHandler);
 
   }
 
-  function topClientes($top,$fD,$fH,$codAlmacen,$zona,$canal,$moneda){
-    $curlHandler = curl_init();
-    $data = array(
-    'top' => $top,
-    'fD' => $fD,
-    'fH' => $fH,
-    'codAlmacen' => $codAlmacen,
-    'zona' => $zona,
-    'canal' => $canal,
-    'moneda' => $moneda
-        );    
 
-    curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/topClientes',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLINFO_HEADER_OUT => true,
 
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => $data,
-    ]);
 
-    $response = curl_exec($curlHandler);
-
-      curl_close($curlHandler);
-      
-      return $response;
-
-  }
-
-  function topVendedores($top,$fD,$fH,$codAlmacen,$moneda){
-    $curlHandler = curl_init();
-    $data = array(
-    'top' => $top,
-    'fD' => $fD,
-    'fH' => $fH,
-    'codAlmacen' => $codAlmacen,
-    'moneda' => $moneda
-        );    
-
-    curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/topVendedores',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLINFO_HEADER_OUT => true,
-
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => $data,
-    ]);
-
-    $response = curl_exec($curlHandler);
-
-      curl_close($curlHandler);
-      
-      return $response;
-
-  }
-
-  function getZona(){
-    $curlHandler = curl_init();
-
-    curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/getZonas',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLINFO_HEADER_OUT => true,
-    ]);
-
-    $response = curl_exec($curlHandler);
-
-      curl_close($curlHandler);
-      
-      return $response;
-
-  }
-
-  function getCanal(){
-    $curlHandler = curl_init();
-
-    curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/getCanal',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLINFO_HEADER_OUT => true,
-    ]);
-
-    $response = curl_exec($curlHandler);
-
-      curl_close($curlHandler);
-      
-      return $response;
-
-  }
-
-  function getLinea(){
-    $curlHandler = curl_init();
-
-    curl_setopt_array($curlHandler, [
-        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/getLinea',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLINFO_HEADER_OUT => true,
-    ]);
-
-    $response = curl_exec($curlHandler);
-
-      curl_close($curlHandler);
-      
-      return $response;
-
-  }
-
-  function getSublinea($linea){
-    $curlHandler = curl_init();
-    $url = "";
-    if(isset($linea)){
-        if($linea!=""){
-            $url ="http://'.URL.':'.PORT.'/'.DIR.'/getSubLinea/".$linea;
-        }else{
-            $url = "http://'.URL.':'.PORT.'/'.DIR.'/getSubLinea";
-        }
-    }else{
-        $url = "http://'.URL.':'.PORT.'/'.DIR.'/getSubLinea";
-    }
-    curl_setopt_array($curlHandler, [
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLINFO_HEADER_OUT => true,
-    ]);
-
-    $response = curl_exec($curlHandler);
-
-      curl_close($curlHandler);
-      
-      return $response;
-
-  }
-
-  function documentsExpiredBs($almacen){
-    $curlHandler = curl_init();
-    $data = array(
-    'target_almacen' => $almacen
-    
-    );
-
-    curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/documentsExpiredBs',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLINFO_HEADER_OUT => true,
-
-    CURLOPT_POST => true,
-
-    CURLOPT_POSTFIELDS => $data,
-    ]);
-
-    $response = curl_exec($curlHandler);
-
-    curl_close($curlHandler);
-
-    $obj = json_decode($response);
- 
-    echo number_format($obj->{'Total'},2,',','.');
-
-  }
-
-  function documentsExpiredDls($almacen){
-    $curlHandler = curl_init();
-    $data = array(
-    'target_almacen' => $almacen
-    
-    );
-
-    curl_setopt_array($curlHandler, [
-    CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/documentsExpiredDls',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLINFO_HEADER_OUT => true,
-
-    CURLOPT_POST => true,
-
-    CURLOPT_POSTFIELDS => $data,
-    ]);
-
-    $response = curl_exec($curlHandler);
-
-    curl_close($curlHandler);
-
-    $obj = json_decode($response);
- 
-    echo number_format($obj->{'Total'},2,',','.');
-
-  }
 
 ?>
  

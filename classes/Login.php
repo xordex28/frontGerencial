@@ -1,5 +1,5 @@
 <?php
-require_once('./config.php');
+
 /**
  * Class login
  * handles the user's login and logout process
@@ -59,7 +59,7 @@ class Login
         );
 
         curl_setopt_array($curlHandler, [
-            CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/authenticate',
+            CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/authenticate',
             CURLOPT_RETURNTRANSFER => true,
             CURLINFO_HEADER_OUT => true,
             CURLOPT_POST => true,
@@ -78,7 +78,7 @@ class Login
             //$_SESSION['nperfil'] = $$obj->{'nperfil'};
             $_SESSION['user_login_status'] = 1;
 
-          
+            $_SESSION['target_almacen'] = 0;
 
           
 

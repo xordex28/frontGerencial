@@ -1,5 +1,5 @@
 <?php
-
+require_once('./config.php');
 /**
  * Class login
  * handles the user's login and logout process
@@ -59,7 +59,7 @@ class Login
         );
 
         curl_setopt_array($curlHandler, [
-            CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/authenticate',
+            CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/authenticate',
             CURLOPT_RETURNTRANSFER => true,
             CURLINFO_HEADER_OUT => true,
             CURLOPT_POST => true,

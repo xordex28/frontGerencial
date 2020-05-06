@@ -1,14 +1,10 @@
-<?php
-require_once("config/db.php"); //Contiene las variables de configuracion para conectar a la base de datos
-//require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
-?>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" onclick="page('page/inicio.php')" href="./">
+            <a class="navbar-brand" onclick="page('page/inicio.php')">
                 <!-- Logo icon --><b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
@@ -19,7 +15,7 @@ require_once("config/db.php"); //Contiene las variables de configuracion para co
                 <!--End Logo icon -->
                 <!-- Logo text --><span>
                     <!-- dark Logo text -->
-                    <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                    <!-- <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" /> -->
                     <!-- Light Logo text -->
                     <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
         </div>
@@ -54,7 +50,7 @@ require_once("config/db.php"); //Contiene las variables de configuracion para co
                                     );
 
                                     curl_setopt_array($curlHandler, [
-                                        CURLOPT_URL => 'http://oesvica.ddns.net:9011/slimframework_v3/useralmacen',
+                                        CURLOPT_URL => 'http://'.URL.':'.PORT.'/'.DIR.'/useralmacen',
                                         CURLOPT_RETURNTRANSFER => true,
                                         CURLINFO_HEADER_OUT => true,
 

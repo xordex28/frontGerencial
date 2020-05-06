@@ -3,8 +3,7 @@
  session_start(); 
  include('../arch/datatables.php');
  ?>   
-<div class="page-wrapper">
-<div class="container-fluid">
+
   <br>
   <h4>Proveedores</h4>
 <div style="max-width: 80vw;overflow: auto;">
@@ -14,13 +13,13 @@
                 <th></th>
                 <th>Rif</th>
                 <th>RazonSocial</th>
-                <th>contacto</th>
+                <th>Contacto</th>
                 <th>Tlf1.</th>
                 <th>Tlf2</th>
                 <th>Tlf3</th>
                 <th>Direccion</th>
                 <th>Email</th>
-                <th>status</th>
+                <th>Status</th>
             </tr>
         </thead>
     </table>
@@ -35,6 +34,4 @@
     </script>
 
 
-</div>  
-</div>  
 </div>  
